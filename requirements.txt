@@ -1,10 +1,7 @@
-anaconda-client==1.7.2
-anaconda-navigator==2.0.3
-appdirs==1.4.4
-applaunchservices==0.2.1
 argh==0.26.2
 asgiref==3.4.1
 atomicwrites==1.4.0
+beautifulsoup4==4.9.3
 backports.weakref==1.0.post1
 bkcharts==0.2
 black==19.10b0
