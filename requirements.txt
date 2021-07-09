@@ -3,14 +3,6 @@ beautifulsoup4==4.9.3
 certifi==2020.12.5
 Django==3.2.5
 future==0.18.2
-json5==0.9.5
 line-bot-sdk==1.19.0
 mccabe==0.6.1
-pycosat==0.6.3
-pycurl==7.43.0.6
-pytest==6.2.3
-PyYAML==5.4.1
-pyzmq==20.0.0
 sqlparse==0.4.1
-unicodecsv==0.14.1
-webencodings==0.5.1
