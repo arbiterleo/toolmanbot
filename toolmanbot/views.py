@@ -5,7 +5,9 @@ from django.conf import settings
 
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent, TextSendMessage
+from linebot.models import MessageEvent,TextSendMessage,TemplateSendMessage,ButtonsTemplate,MessageTemplateAction
+
+import json
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -27,10 +29,21 @@ def callback(request):
 
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
-                line_bot_api.reply_message(  # 回復傳入的訊息文字
+
+                if event.message.text == "[[最愛清單]]":
+
+                    FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
+                    line_bot_api.reply_message(reply_token, FlexSendMessage("[[最愛清單]]",FlexMessage))
+
+
+                else:
+                    line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
                     TextSendMessage(text=event.message.text)
-                )
+                    )
+
+
+
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
