@@ -33,7 +33,7 @@ def callback(request):
                 if event.message.text == "[[最愛清單]]":
 
                     FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
-                    line_bot_api.reply_message(reply_token, FlexSendMessage("[[最愛清單]]",FlexMessage))
+                    line_bot_api.reply_message(event.reply_token, FlexSendMessage("[[最愛清單]]",FlexMessage))
 
 
                 else:
