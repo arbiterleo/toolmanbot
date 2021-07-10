@@ -5,7 +5,14 @@ from django.conf import settings
 
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent,TextSendMessage,TemplateSendMessage,ButtonsTemplate,MessageTemplateAction
+from linebot.models import (
+    MessageEvent,
+    TextSendMessage,
+    TemplateSendMessage,
+    ButtonsTemplate,
+    MessageTemplateAction,
+    FlexSendMessage
+)
 
 import json
 
