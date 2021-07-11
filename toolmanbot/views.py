@@ -8,10 +8,13 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import (
     MessageEvent,
     TextSendMessage,
-    TemplateSendMessage,
-    ButtonsTemplate,
-    MessageTemplateAction,
-    FlexSendMessage
+    FlexSendMessage,
+    ButtonComponent,
+    TextComponent,
+    SeparatorComponent,
+    BubbleContainer,
+    BoxComponent,
+    MessageAction
 )
 
 import json
@@ -46,7 +49,7 @@ def callback(request):
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
-                    TextSendMessage(text=event.message.text)
+                    TextSendMessage(text=event.source.userId)
                     )
 
 
