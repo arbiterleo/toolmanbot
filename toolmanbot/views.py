@@ -49,7 +49,7 @@ def callback(request):
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
-                    TextSendMessage(text=event.source.userId)
+                    TextSendMessage(text=event.message.text)
                     )
 
 
