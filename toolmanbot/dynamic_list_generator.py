@@ -38,3 +38,4 @@ def favorite_list_generator(favorite_list):
                     body=BoxComponent(layout="vertical",contents=button_list
                     )
                 )
+    return bubble
