@@ -18,6 +18,7 @@ from linebot.models import (
 )
 
 from .dynamic_list_generator import favorite_list_generator
+from .abc import add
 import json
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -25,7 +26,8 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 favorite_list=['小美','小花']
 favorite_list_button=favorite_list_generator(favorite_list)
-
+a=1
+b=add(a)
 @csrf_exempt
 def callback(request):
 
@@ -78,6 +80,12 @@ def callback(request):
                 elif event.message.text == '搜尋對象':
                     FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
                     line_bot_api.reply_message(event.reply_token, FlexSendMessage("對象1:"+favorite_list[0],FlexMessage))
+
+                elif event.message.text == 'test':
+                   line_bot_api.reply_message(  # 回復傳入的訊息文字
+                    event.reply_token,
+                    TextSendMessage(text=b)
+                    )
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
