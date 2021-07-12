@@ -28,7 +28,7 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 favorite_list=['小美','小花']
 favorite_list_button=favorite_list_generator(favorite_list)
 
-a=datedo_list_generator(favorite_list[i])
+a=datedo_list_generator(favorite_list[0])
 
 @csrf_exempt
 def callback(request):
@@ -51,8 +51,8 @@ def callback(request):
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
-                elif event.message.text == '搜尋對象'+favorite_list[i]:
-                    flex_message2 = FlexSendMessage(alt_text='搜尋對象'+favorite_list[i],contents=a)
+                elif event.message.text == '搜尋對象'+favorite_list[0]:
+                    flex_message2 = FlexSendMessage(alt_text='搜尋對象'+favorite_list[0],contents=a)
                     line_bot_api.reply_message(event.reply_token, flex_message2)
 
                 else:
