@@ -6,9 +6,9 @@ def favorite_list_generator(favorite_list):
                     spacing="sm",
                     content=[
                         TextComponent(text="最愛清單", weight="bold", size="md", margin="sm", wrap=True,),
-                        SeparatorComponent(margin = "xl"),
-                        ButtonComponent(style="primary", color="#997B66", size="md", margin="sm",
-                                        action=MessageAction(label="+", text='請輸入對象名字'), )
+                        SeparatorComponent(margin = "xl")
+#                        ,ButtonComponent(style="primary", color="#997B66", size="md", margin="sm",
+#                                        action=MessageAction(label="+", text='請輸入對象名字'), )
                     ])]
     for i in favorite_list:
         favorite_button = ButtonComponent(style="primary", color="#997B66", size="sm", margin="sm",
@@ -20,7 +20,7 @@ def favorite_list_generator(favorite_list):
         button_list.append(button_row)
 
     bubble=BubbleContainer(
-        director='ltr',
+        direction='ltr',
 
         body=BoxComponent(
             layout="vertical",
