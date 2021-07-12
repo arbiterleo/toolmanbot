@@ -1,14 +1,4 @@
-from linebot.models import (
-    ButtonComponent,
-    TextComponent,
-    SeparatorComponent,
-    BubbleContainer,
-    BoxComponent,
-    MessageAction
-)
-
 def favorite_list_generator(favorite_list):
-
     button_list = [BoxComponent(
                     layout="vertical",
                     margin="sm",
@@ -22,7 +12,6 @@ def favorite_list_generator(favorite_list):
 
     for i in favorite_list:
 
-
         favorite_button = ButtonComponent(style="primary", color="#997B66", size="sm", margin="sm",
                                         action=MessageAction(label=i, text=f'搜尋對象：{i}'),)
         delete_button=ButtonComponent(style="secondary", color="#F1DCA7", size="sm", margin="sm", flex=0,
@@ -34,5 +23,6 @@ def favorite_list_generator(favorite_list):
 
     bubble=BubbleContainer(
                     director='ltr',
-                    body=BoxComponent(layout="vertical",contents=button_list)
+                    body=BoxComponent(layout="vertical",contents=button_list
                     )
+                )
