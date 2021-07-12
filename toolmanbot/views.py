@@ -52,8 +52,8 @@ def callback(request):
                     content=[
                         TextComponent(text="最愛清單", weight="bold", size="md", margin="sm", wrap=True,),
                         SeparatorComponent(margin = "xl")
-#                        ,ButtonComponent(style="primary", color="#997B66", size="md", margin="sm",
-#                                        action=MessageAction(label="+", text='請輸入對象名字'), )
+                        ,ButtonComponent(style="primary", color="#997B66", size="md", margin="sm",
+                                       action=MessageAction(label="+", text='請輸入對象名字'), )
                     ])]
 
                     for i in favorite_list:
