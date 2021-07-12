@@ -19,7 +19,6 @@ from linebot.models import (
 
 from .dynamic_list_generator import favorite_list_generator
 from .datedo import datedo_list_generator
-
 import json
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -27,8 +26,6 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 favorite_list=['小美','小花']
 favorite_list_button=favorite_list_generator(favorite_list)
-date=favorite_list[0]
-a=datedo_list_generator(date)
 
 @csrf_exempt
 def callback(request):
@@ -48,12 +45,14 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '[[最愛清單]]':
+
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
-                elif event.message.text == '搜尋對象'+favorite_list[0]:
-                    flex_message2 = FlexSendMessage(alt_text='搜尋對象'+favorite_list[0],contents=a)
-                    line_bot_api.reply_message(event.reply_token, flex_message2)
+                elif event.message.text == '搜尋對象：小美':
+                    FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
+                    line_bot_api.reply_message(event.reply_token, FlexSendMessage("對象1:"+favorite_list[0],FlexMessage))
+
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
