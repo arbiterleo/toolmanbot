@@ -27,8 +27,8 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 favorite_list=['小美','小花']
 favorite_list_button=favorite_list_generator(favorite_list)
-
-a=datedo_list_generator(favorite_list[0])
+date=favorite_list[0]
+a=datedo_list_generator(date)
 
 @csrf_exempt
 def callback(request):
