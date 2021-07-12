@@ -87,7 +87,7 @@ def favorite_list_generator(favorite_list):
         button_list.append(button_row)
 
     bubble=BubbleContainer(
-        direction='ltr',
+        director='ltr',
 
         body=BoxComponent(
             layout="vertical",
