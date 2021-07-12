@@ -27,6 +27,8 @@ line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 favorite_list=['小美','小花']
+
+
 @csrf_exempt
 def callback(request):
 
@@ -59,34 +61,6 @@ def callback(request):
                     )
 
 
-
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
-
-if event.message.text == "哈囉":
-
-                    line_bot_api.reply_message(  # 回復傳入的訊息文字
-                        event.reply_token,
-                        TemplateSendMessage(
-                            alt_text='Buttons template',
-                            template=ButtonsTemplate(
-                                title='Menu',
-                                text='請選擇地區',
-                                actions=[
-                                    MessageTemplateAction(
-                                        label='台北市',
-                                        text='台北市'
-                                    ),
-                                    MessageTemplateAction(
-                                        label='台中市',
-                                        text='台中市'
-                                    ),
-                                    MessageTemplateAction(
-                                        label='高雄市',
-                                        text='高雄市'
-                                    )
-                                ]
-                            )
-                        )
-                    )
