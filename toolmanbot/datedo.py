@@ -16,7 +16,7 @@ def datedo_list_generator(date):
                     margin="sm",
                     spacing="sm",
                     contents=[
-                        TextComponent(text=date, weight="bold", size="md", margin="sm", wrap=True,),
+                        TextComponent(text=date, weight="bold", size="xxl", margin="sm", wrap=True,),
                         SeparatorComponent(margin = "xl")
                         ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
                                        action=MessageAction(label="目前好感度", text=date+'目前好感度'), )
