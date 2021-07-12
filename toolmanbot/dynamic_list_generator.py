@@ -7,7 +7,7 @@ def favorite_list_generator(favorite_list):
                     content=[
                         TextComponent(text="最愛清單", weight="bold", size="md", margin="sm", wrap=True,),
                         SeparatorComponent(margin = "xl"),
-                        ButtoonComponen(style="primary", color="#997B66", size="sm", margin="sm",
+                        ButtoonComponen(style="primary", color="#997B66", size="md", margin="sm",
                                         action=MessageAction(label=i, text='新增對象'), )
                     ])]
     for i in favorite_list:

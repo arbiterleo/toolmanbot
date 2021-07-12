@@ -9,6 +9,9 @@ from linebot.models import (
     MessageEvent,
     TextSendMessage,
     FlexSendMessage,
+    TemplateSendMessage,
+    ButtonsTemplate,
+    MessageTemplateAction,
     ButtonComponent,
     TextComponent,
     SeparatorComponent,
@@ -17,12 +20,13 @@ from linebot.models import (
     MessageAction
 )
 
+from dynamic_list_generator import favorite_list_generator
 import json
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-
+favorite_list=['小美','小花']
 @csrf_exempt
 def callback(request):
 
@@ -41,10 +45,12 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == "[[最愛清單]]":
+                    FlexMessage=favorite_list_generator((favorite_list))
+                    line_bot_api(event.reply_token,FlexMessage("[[最愛清單]]",FlexMessage))
 
+                elif event.message.text == "[[最愛清單]]->[[對象1]]":
                     FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
-                    line_bot_api.reply_message(event.reply_token, FlexSendMessage("[[最愛清單]]",FlexMessage))
-
+                    line_bot_api.reply_message(event.reply_token, FlexSendMessage("[[最愛清單]]1",FlexMessage))
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
@@ -57,3 +63,30 @@ def callback(request):
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
+
+if event.message.text == "哈囉":
+
+                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                        event.reply_token,
+                        TemplateSendMessage(
+                            alt_text='Buttons template',
+                            template=ButtonsTemplate(
+                                title='Menu',
+                                text='請選擇地區',
+                                actions=[
+                                    MessageTemplateAction(
+                                        label='台北市',
+                                        text='台北市'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='台中市',
+                                        text='台中市'
+                                    ),
+                                    MessageTemplateAction(
+                                        label='高雄市',
+                                        text='高雄市'
+                                    )
+                                ]
+                            )
+                        )
+                    )
