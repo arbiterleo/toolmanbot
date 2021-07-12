@@ -52,11 +52,7 @@ def callback(request):
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
-                elif event.message.text == '搜尋對象：小美':
-                    FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
-                    line_bot_api.reply_message(event.reply_token, FlexSendMessage("對象1:"+favorite_list[0],FlexMessage))
-
-                elif event.message.text == 'datedo':
+                elif event.message.text == "搜尋對象'"+ date:
 
                     flex_message2=FlexSendMessage(alt_text=favorite_list[0],contents=a)
                     line_bot_api.reply_message(event.reply_token, flex_message2)
