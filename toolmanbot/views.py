@@ -43,10 +43,8 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '[[最愛清單]]':
-                    flex_message1=FlexSendMessage(alt_text='最愛清單',
-                    contents=favorite_list_generator(favorite_list)
-                    )
-                    line_bot_api.reply_message(event.reply_token, flex_message1)
+                    flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_generator(favorite_list))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="jsadioashjdosajdo"))
 
                 elif event.message.text == '搜尋對象':
                     FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
