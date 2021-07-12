@@ -25,37 +25,6 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 favorite_list=['小美','小花']
 
-#dynamic_list_generator
-def favorite_list_generator(favorite_list):
-
-    button_list = [BoxComponent(
-                    layout="vertical",
-                    margin="sm",
-                    spacing="sm",
-                    content=[
-                        TextComponent(text="最愛清單", weight="bold", size="md", margin="sm", wrap=True,),
-                        SeparatorComponent(margin = "xl")
-#                        ,ButtonComponent(style="primary", color="#997B66", size="md", margin="sm",
-#                                        action=MessageAction(label="+", text='請輸入對象名字'), )
-                    ])]
-
-    for i in favorite_list:
-        favorite_button = ButtonComponent(style="primary", color="#997B66", size="sm", margin="sm",
-                                        action=MessageAction(label=i, text=f'搜尋對象：{i}'),)
-        delete_button=ButtonComponent(style="secondary", color="#F1DCA7", size="sm", margin="sm", flex=0,
-                                      action=MessageAction(label="-", text="刪除對象："+i), )
-        button_row=BoxComponent(layout="horizontal", margin="md", spacing="sm",
-                                contents=[favorite_button, delete_button])
-        button_list.append(button_row)
-
-    bubble=BubbleContainer(
-        director='ltr',
-
-        body=BoxComponent(
-            layout="vertical",
-            contents=button_list
-        )
-    )
 
 @csrf_exempt
 def callback(request):
@@ -75,9 +44,33 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '[[最愛清單]]':
-                    flex_message1=FlexSendMessage(alt_text='最愛清單',
-                    contents=favorite_list_generator(favorite_list)
+
+                    button_list = [BoxComponent(
+                    layout="vertical",
+                    margin="sm",
+                    spacing="sm",
+                    content=[
+                        TextComponent(text="最愛清單", weight="bold", size="md", margin="sm", wrap=True,),
+                        SeparatorComponent(margin = "xl")
+#                        ,ButtonComponent(style="primary", color="#997B66", size="md", margin="sm",
+#                                        action=MessageAction(label="+", text='請輸入對象名字'), )
+                    ])]
+
+                    for i in favorite_list:
+                        favorite_button = ButtonComponent(style="primary", color="#997B66", size="sm", margin="sm",
+                                        action=MessageAction(label=i, text=f'搜尋對象：{i}'),)
+                        delete_button=ButtonComponent(style="secondary", color="#F1DCA7", size="sm", margin="sm", flex=0,
+                                      action=MessageAction(label="-", text="刪除對象："+i), )
+                        button_row=BoxComponent(layout="horizontal", margin="md", spacing="sm",
+                                contents=[favorite_button, delete_button])
+                        button_list.append(button_row)
+
+                    bubble=BubbleContainer(
+                    director='ltr',
+                    body=BoxComponent(layout="vertical",contents=button_list)
                     )
+
+                    flex_message1=FlexSendMessage(alt_text='最愛清單',contents=bubble)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
                 elif event.message.text == '搜尋對象':
