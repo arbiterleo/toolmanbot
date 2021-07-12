@@ -49,7 +49,7 @@ def callback(request):
 
                 if event.message.text == '搜尋對象':
                     FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
-                    line_bot_api.reply_message(event.reply_token, FlexSendMessage("對象1:"+favorite_list[0],FlexMessage))
+                    line_bot_api.reply_message(event.reply_token, FlexSendMessage("對象1:"+favorite_list[1],FlexMessage))
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
