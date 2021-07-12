@@ -27,6 +27,9 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 favorite_list=['小美','小花']
 favorite_list_button=favorite_list_generator(favorite_list)
 
+date=favorite_list[0]
+a=datedo_list_generator(date)
+
 @csrf_exempt
 def callback(request):
 
@@ -53,6 +56,10 @@ def callback(request):
                     FlexMessage = json.load(open('love_list.json','r',encoding='utf-8'))
                     line_bot_api.reply_message(event.reply_token, FlexSendMessage("對象1:"+favorite_list[0],FlexMessage))
 
+                elif event.message.text == 'datedo':
+
+                    flex_message2=FlexSendMessage(alt_text=favorite_list[0],contents=a)
+                    line_bot_api.reply_message(event.reply_token, flex_message2)
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字

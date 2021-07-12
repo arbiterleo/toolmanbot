@@ -1,10 +1,22 @@
+from linebot.models import (
+    MessageEvent,
+    TextSendMessage,
+    FlexSendMessage,
+    ButtonComponent,
+    TextComponent,
+    SeparatorComponent,
+    BubbleContainer,
+    BoxComponent,
+    MessageAction
+)
+
 def datedo_list_generator(date):
     button_list = [BoxComponent(
                     layout="vertical",
                     margin="sm",
                     spacing="sm",
                     contents=[
-                        TextComponent(text="對象："+date, weight="bold", size="md", margin="sm", wrap=True,),
+                        TextComponent(text=date, weight="bold", size="md", margin="sm", wrap=True,),
                         SeparatorComponent(margin = "xl")
                         ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
                                        action=MessageAction(label="目前好感度", text=date+'目前好感度'), )
