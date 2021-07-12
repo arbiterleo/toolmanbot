@@ -1,3 +1,12 @@
+from linebot.models import (
+    ButtonComponent,
+    TextComponent,
+    SeparatorComponent,
+    BubbleContainer,
+    BoxComponent,
+    MessageAction
+)
+
 def favorite_list_generator(favorite_list):
 
     button_list = [BoxComponent(

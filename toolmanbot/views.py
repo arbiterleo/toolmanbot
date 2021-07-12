@@ -17,7 +17,7 @@ from linebot.models import (
     MessageAction
 )
 
-#from dynamic_list_generator import favorite_list_generator
+from dynamic_list_generator import favorite_list_generator
 import json
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
