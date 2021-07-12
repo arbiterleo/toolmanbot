@@ -9,6 +9,7 @@ from linebot.models import (
     BoxComponent,
     MessageAction
 )
+
 def favorite_list_generator(favorite_list):
     button_list = [BoxComponent(
                     layout="vertical",
