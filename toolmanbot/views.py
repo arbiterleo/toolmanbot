@@ -67,10 +67,10 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
 
                 elif event.message.text == '最愛清單測試':
-                    for i in favorite_list:
-                        line_bot_api.reply_message(
+
+                    line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text=favorite_list[i])
+                        TextSendMessage(text=favorite_list[-1])
                         )
 
                 else:
