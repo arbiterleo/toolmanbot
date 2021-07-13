@@ -19,7 +19,7 @@ def favorite_list_generator(favorite_list):
                         TextComponent(text="最愛清單", weight="bold", size="md", margin="sm", wrap=True,),
                         SeparatorComponent(margin = "xl")
                         ,ButtonComponent(style="primary", color="#997B66", size="md", margin="sm",
-                                       action=MessageAction(label="+", text='請輸入對象名字'), )
+                                       action=MessageAction(label="+", text='開始新增對象，請輸入「新增對象：對象名稱」'), )
                     ])]
 
     for i in favorite_list:
