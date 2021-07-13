@@ -18,7 +18,9 @@ from linebot.models import (
 )
 
 from .dynamic_list_generator import favorite_list_generator
+
 from .datedo import datedo_list_generator
+
 import json
 import re
 
@@ -26,8 +28,9 @@ import re
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-
-
+favorite_list=['小美','小花']
+date=favorite_list[0]
+a=datedo_list_generator(date)
 
 @csrf_exempt
 def callback(request):
@@ -49,11 +52,8 @@ def callback(request):
 
         for event in events:
 
-            favorite_list=['小美','小花']
+            global favorite_list
             favorite_list_button=favorite_list_generator(favorite_list)
-
-            date=favorite_list[0]
-            a=datedo_list_generator(date)
 
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
