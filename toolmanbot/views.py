@@ -34,9 +34,6 @@ a=datedo_list_generator(date)
 
 @csrf_exempt
 def callback(request):
-
-    #    favorite_list_button=favorite_list_generator(favorite_list)
-
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
@@ -50,34 +47,29 @@ def callback(request):
         except LineBotApiError:
             return HttpResponseBadRequest()
 
-        for event in events:
+        global favorite_list
 
-            global favorite_list
-            favorite_list_button=favorite_list_generator(favorite_list)
+        for event in events:
 
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '最愛清單':
-
+                    favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
                 elif event.message.text == "搜尋對象："+ date:
-
                     flex_message2=FlexSendMessage(alt_text=favorite_list[0],contents=a)
                     line_bot_api.reply_message(event.reply_token, flex_message2)
 
                 elif re.match("新增對象：", event.message.text):
-
                     favorite_list.append(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
 
                 elif event.message.text == '最愛清單測試':
-
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text=favorite_list[-1])
-                        )
+                        TextSendMessage(text=favorite_list[-1]))
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
