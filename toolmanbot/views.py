@@ -62,7 +62,7 @@ def callback(request):
                 elif re.match("新增對象：", event.message.text):
 
                     favorite_list.append(event.message.text[6:])
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[6:]))
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
