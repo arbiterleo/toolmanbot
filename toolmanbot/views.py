@@ -66,10 +66,16 @@ def callback(request):
                     favorite_list.append(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
 
-                else:
+                elif event.message.text == '最愛清單測試':
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
                     TextSendMessage(text=event.message.text)
+                    )
+
+                else:
+                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                    event.reply_token,
+                    TextSendMessage(text=favorite_list)
                     )
 
         return HttpResponse()
