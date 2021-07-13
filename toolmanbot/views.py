@@ -26,8 +26,7 @@ import re
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-favorite_list=['小美','小花']
-favorite_list_button=favorite_list_generator(favorite_list)
+
 
 date=favorite_list[0]
 a=datedo_list_generator(date)
@@ -51,7 +50,11 @@ def callback(request):
             return HttpResponseBadRequest()
 
         for event in events:
+
             if isinstance(event, MessageEvent):  # 如果有訊息事件
+
+                favorite_list=['小美','小花']
+                favorite_list_button=favorite_list_generator(favorite_list)
 
                 if event.message.text == '最愛清單':
 
