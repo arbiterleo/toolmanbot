@@ -26,14 +26,16 @@ import re
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-favorite_list=['小美','小花']
-favorite_list_button=favorite_list_generator(favorite_list)
+
 
 date=favorite_list[0]
 a=datedo_list_generator(date)
 
 @csrf_exempt
 def callback(request):
+
+    favorite_list=['小美','小花']
+    favorite_list_button=favorite_list_generator(favorite_list)
 
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
@@ -62,7 +64,7 @@ def callback(request):
                 elif re.match("新增對象：", event.message.text):
 
                     favorite_list.append(event.message.text[6:])
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[6:]))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
