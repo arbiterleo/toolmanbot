@@ -35,7 +35,7 @@ a=datedo_list_generator(date)
 @csrf_exempt
 def callback(request):
 
-    favorite_list=['小美','小花']
+    favorite_list1=['小美','小花']
 
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
@@ -63,14 +63,14 @@ def callback(request):
 
                 elif re.match("新增對象：", event.message.text):
 
-                    favorite_list.append(event.message.text[5:])
+                    favorite_list1.append(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
 
                 elif event.message.text == '最愛清單測試':
 
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text=favorite_list[-1])
+                        TextSendMessage(text=favorite_list1[-1])
                         )
 
                 else:
