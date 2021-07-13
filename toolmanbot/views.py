@@ -28,8 +28,6 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 
 
-date=favorite_list[0]
-a=datedo_list_generator(date)
 
 @csrf_exempt
 def callback(request):
@@ -51,10 +49,13 @@ def callback(request):
 
         for event in events:
 
-            if isinstance(event, MessageEvent):  # 如果有訊息事件
+            favorite_list=['小美','小花']
+            favorite_list_button=favorite_list_generator(favorite_list)
 
-                favorite_list=['小美','小花']
-                favorite_list_button=favorite_list_generator(favorite_list)
+            date=favorite_list[0]
+            a=datedo_list_generator(date)
+
+            if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '最愛清單':
 
