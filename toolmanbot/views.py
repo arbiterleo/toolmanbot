@@ -35,7 +35,7 @@ a=datedo_list_generator(date)
 @csrf_exempt
 def callback(request):
 
-
+    favorite_list=['小美','小花']
 
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
