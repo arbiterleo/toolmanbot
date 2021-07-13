@@ -17,16 +17,67 @@ from linebot.models import (
     MessageAction
 )
 
-from .dynamic_list_generator import favorite_list_generator
+#from .dynamic_list_generator import favorite_list_generator
+def favorite_list_generator(favorite_list):
+    button_list = [BoxComponent(
+                    layout="vertical",
+                    margin="sm",
+                    spacing="sm",
+                    contents=[
+                        TextComponent(text="最愛清單", weight="bold", size="md", margin="sm", wrap=True,),
+                        SeparatorComponent(margin = "xl")
+                        ,ButtonComponent(style="primary", color="#997B66", size="md", margin="sm",
+                                       action=MessageAction(label="+", text='開始新增對象，請輸入「新增對象：對象名稱」'), )
+                    ])]
 
-from .datedo import datedo_list_generator
+    for i in favorite_list:
+
+        favorite_button = ButtonComponent(style="primary", color="#997B66", size="sm", margin="sm",
+                                        action=MessageAction(label=i, text=f'搜尋對象：{i}'),)
+        delete_button=ButtonComponent(style="secondary", color="#F1DCA7", size="sm", margin="sm", flex=0,
+                                      action=MessageAction(label="-", text="刪除對象："+i), )
+        button_row=BoxComponent(layout="horizontal", margin="md", spacing="sm",
+                                contents=[favorite_button, delete_button])
+        button_list.append(button_row)
+
+
+    bubble=BubbleContainer(
+                    director='ltr',
+                    body=BoxComponent(layout="vertical",contents=button_list
+                    )
+                )
+    return bubble
+#from .datedo import datedo_list_generator
+def datedo_list_generator(date):
+    button_list = [BoxComponent(
+                    layout="vertical",
+                    margin="sm",
+                    spacing="sm",
+                    contents=[
+                        TextComponent(text=date, weight="bold", size="xxl", margin="sm", wrap=True,),
+                        SeparatorComponent(margin = "xl")
+                        ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
+                                       action=MessageAction(label="目前好感度", text=date+'目前好感度'), )
+
+                        ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
+                                       action=MessageAction(label="上傳新的對話", text='請開始上傳對話：'+date), )
+
+                        ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
+                                       action=MessageAction(label="尋找話題", text='尋找話題：'+date), )
+                    ])]
+    bubble=BubbleContainer(
+                    director='ltr',
+                    body=BoxComponent(layout="vertical",contents=button_list
+                    )
+                )
+    return bubble
 
 import json
 import re
 
 
-line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
-parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
+line_bot_api = LineBotApi('e93603f23a91577079b4444b359ded8a')
+parser = WebhookParser('PEgvXyP6nPE8lIgLXAIz2D7Q3xNs4WLNHkELlarlhvBP85r/FnjLSnE+EKVp5reuNstda/i0yWXD0Tbe2IUWyqR3c6ws1t9HK4KIu9jfKS6bC7N2A1M6bLU1jm4Ukd4B4sn5pkj9A4RQgm6ENu3GKgdB04t89/1O/w1cDnyilFU=')
 
 favorite_list=['小美','小花']
 date=favorite_list[0]
@@ -47,7 +98,7 @@ def callback(request):
         except LineBotApiError:
             return HttpResponseBadRequest()
 
-        global favorite_list
+        global favorite_list #全域變數
 
         for event in events:
 
@@ -65,6 +116,7 @@ def callback(request):
                 elif re.match("新增對象：", event.message.text):
                     favorite_list.append(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
+                    print(favorite_list)
 
                 elif event.message.text == '最愛清單測試':
                     line_bot_api.reply_message(
