@@ -28,7 +28,7 @@ import re
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-favorite_list=['小美','小花']
+favorite_list=['對象1','對象2','對象3']
 date=favorite_list[0]
 a=datedo_list_generator(date)
 
