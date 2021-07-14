@@ -1,14 +1,11 @@
 from linebot.models import (
-    MessageEvent,
-    TextSendMessage,
-    FlexSendMessage,
     ButtonComponent,
     TextComponent,
     SeparatorComponent,
     BubbleContainer,
     BoxComponent,
     MessageAction
-)
+    )
 
 def favorite_list_generator(favorite_list):
     button_list = [BoxComponent(
@@ -20,6 +17,7 @@ def favorite_list_generator(favorite_list):
                         SeparatorComponent(margin = "lg")
                     ])]
 
+#對象按鈕(查詢&刪除)
     for i in favorite_list:
 
         favorite_button = ButtonComponent(style="primary", color="#ff66a3", size="sm", margin="sm",
@@ -30,9 +28,11 @@ def favorite_list_generator(favorite_list):
                                 contents=[favorite_button, delete_button])
         button_list.append(button_row)
 
+#新增按鈕
     add_button=BoxComponent(layout="horizontal", margin="md", spacing="sm",
-                                contents=[ButtonComponent(style="primary", color="#ff99c2", size="md", margin="sm",
-                                       action=MessageAction(label="+", text='開始新增對象，請輸入「新增對象：對象名稱」'), )])
+                            contents=[ButtonComponent(style="primary", color="#ff99c2", size="md", margin="sm",
+                            action=MessageAction(label="+", text='開始新增對象，請輸入「新增對象：對象名稱」'), )])
+
     button_list.append(add_button)
 
     bubble=BubbleContainer(

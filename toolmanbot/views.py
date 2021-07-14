@@ -3,6 +3,9 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbid
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
+import json
+import re
+
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import (
@@ -15,22 +18,16 @@ from linebot.models import (
     BubbleContainer,
     BoxComponent,
     MessageAction
-)
+    )
 
-from .dynamic_list_generator import favorite_list_generator
-
-from .datedo import datedo_list_generator
-
-import json
-import re
-
+#function
+from .dynamic_list_generator import favorite_list_generator #最愛清單function
+from .datedo import datedo_list_generator  #對象工具列
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 favorite_list=["小美","小花"] #最愛清單
-#date=favorite_list[0]
-#a=datedo_list_generator(date)
 
 @csrf_exempt
 def callback(request):
@@ -59,10 +56,9 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
                 elif re.match("搜尋對象：", event.message.text):
-                    date=event.message.text[5:]
+                    date=event.message.text[5:] # 對象名稱(date)
                     flex_message2=FlexSendMessage(alt_text=date,contents=datedo_list_generator(date))
                     line_bot_api.reply_message(event.reply_token, flex_message2)
- #                   line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text[5:]))
 
                 elif re.match("新增對象：", event.message.text):
                     favorite_list.append(event.message.text[5:])
@@ -72,12 +68,10 @@ def callback(request):
                     favorite_list.remove(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象："+event.message.text[5:]))
 
-
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
-                    TextSendMessage(text=event.message.text)
-                    )
+                    TextSendMessage(text="請輸入有效指令"))
 
         return HttpResponse()
     else:
