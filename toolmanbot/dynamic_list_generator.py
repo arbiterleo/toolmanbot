@@ -26,7 +26,7 @@ def favorite_list_generator(favorite_list):
 
         favorite_button = ButtonComponent(style="primary", color="#ff66a3", size="sm", margin="sm",
                                         action=MessageAction(label=i, text=f'搜尋對象：{i}'),)
-        delete_button=ButtonComponent(style="secondary", color="#ff1a1a", size="sm", margin="sm", flex=0,
+        delete_button=ButtonComponent(style="secondary", color="#ff3333", size="sm", margin="sm", flex=0,
                                       action=MessageAction(label="-", text="刪除對象："+i), )
         button_row=BoxComponent(layout="horizontal", margin="md", spacing="sm",
                                 contents=[favorite_button, delete_button])
