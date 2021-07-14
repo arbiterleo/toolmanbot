@@ -28,9 +28,9 @@ import re
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-favorite_list=['對象1','對象2','對象3']
-date=favorite_list[0]
-a=datedo_list_generator(date)
+favorite_list=[]
+#date=favorite_list[0]
+#a=datedo_list_generator(date)
 
 @csrf_exempt
 def callback(request):
@@ -58,19 +58,14 @@ def callback(request):
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
-                elif event.message.text == "搜尋對象："+ date:
-                    flex_message2=FlexSendMessage(alt_text=favorite_list[0],contents=a)
+                elif re.match("搜尋對象：", event.message.text):
+                    date=event.message.text[5:]
+                    flex_message2=FlexSendMessage(alt_text=date,contents=datedo_list_generator[date])
                     line_bot_api.reply_message(event.reply_token, flex_message2)
 
                 elif re.match("新增對象：", event.message.text):
                     favorite_list.append(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
-                    print(favorite_list)
-
-                elif event.message.text == '最愛清單測試':
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextSendMessage(text=favorite_list[-1]))
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
