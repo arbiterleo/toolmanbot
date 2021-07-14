@@ -59,10 +59,10 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
                 elif re.match("搜尋對象：", event.message.text):
- #                   date=event.message.text[5:]
- #                   flex_message2=FlexSendMessage(alt_text=date,contents=datedo_list_generator[date])
- #                   line_bot_api.reply_message(event.reply_token, flex_message2)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text[5:]))
+                    date=event.message.text[5:]
+                    flex_message2=FlexSendMessage(alt_text=date,contents=datedo_list_generator(date))
+                    line_bot_api.reply_message(event.reply_token, flex_message2)
+ #                   line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text[5:]))
 
                 elif re.match("新增對象：", event.message.text):
                     favorite_list.append(event.message.text[5:])
