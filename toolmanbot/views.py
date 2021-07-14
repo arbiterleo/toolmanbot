@@ -28,7 +28,7 @@ import re
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-favorite_list=[] #最愛清單
+favorite_list=["小美","小花"] #最愛清單
 #date=favorite_list[0]
 #a=datedo_list_generator(date)
 
@@ -67,6 +67,11 @@ def callback(request):
                 elif re.match("新增對象：", event.message.text):
                     favorite_list.append(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
+
+                elif re.match("刪除對象：", event.message.text):
+                    favorite_list.remove(event.message.text[5:])
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象："+event.message.text[5:]))
+
 
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
