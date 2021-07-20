@@ -19,7 +19,7 @@ def topic_carousel(topic):
                         TextComponent(text=topic[i], weight="bold", size="xxl", margin="sm", wrap=True,),
                         SeparatorComponent(margin = "xl")
 
-                        #Button
+                        #好感度Button
                         ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
                                        action=MessageAction(label="測試", text=topic+':測試'), )
 
@@ -32,9 +32,9 @@ def topic_carousel(topic):
                 )
         carousel_list.append(bubble)
 
-    carousel=CarouselContainer(contents=carousel_list
+    carousel=CarouselContainer(contents=carousel_list)
 
-    )
+    return carousel
 
 
 
