@@ -23,14 +23,18 @@ from linebot.models import (
 #function
 from .dynamic_list_generator import favorite_list_generator #最愛清單function
 from .datedo import datedo_list_generator  #對象工具列
+from .topic import topic_carousel
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 favorite_list=["小美","小花"] #最愛清單
+topic=["a","b","c"]
+
 
 @csrf_exempt
 def callback(request):
+
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
@@ -45,6 +49,7 @@ def callback(request):
             return HttpResponseBadRequest()
 
         global favorite_list #全域變數
+        global topic
 
         for event in events:
 
@@ -68,11 +73,15 @@ def callback(request):
                     favorite_list.remove(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象："+event.message.text[5:]))
 
+                elif event.message.text == '訊息測試':
+                    flex_message3=FlexSendMessage(alt_text='test',contents=topic_carousel(topic))
+                    line_bot_api.reply_message(event.reply_token, flex_message3)
+
                 else:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
                     TextSendMessage(text="請輸入有效指令"))
-
+            #elif instance(event, ):
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
