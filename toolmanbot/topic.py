@@ -21,7 +21,7 @@ def topic_carousel(topic):
 
                         #好感度Button
                         ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
-                                       action=MessageAction(label="測試", text=topic+':測試'), )
+                                       action=MessageAction(label="測試", text=topic[i]+':測試'), )
 
                     ])]
 
