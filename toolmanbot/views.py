@@ -79,7 +79,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 else:
-                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                    line_bot_api.reply_message(  # 回覆傳入的訊息文字
                     event.reply_token,
                     TextSendMessage(text="請輸入有效指令"))
             #elif instance(event, ):
