@@ -12,6 +12,7 @@ from linebot.models import (
     MessageEvent,
     TextSendMessage,
     FlexSendMessage,
+    TemplateSendMessage,
     ButtonComponent,
     TextComponent,
     SeparatorComponent,
@@ -23,7 +24,7 @@ from linebot.models import (
 #function
 from .dynamic_list_generator import favorite_list_generator #最愛清單function
 from .datedo import datedo_list_generator  #對象工具列
-from .topic import topic_carousel
+from .carousel import carousel_list
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -74,7 +75,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象："+event.message.text[5:]))
 
                 elif event.message.text == '訊息測試':
-                    flex_message3=FlexSendMessage(alt_text='test',contents=topic_carousel(topic))
+                    flex_message3=carousel_list(topic)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 else:
@@ -82,6 +83,7 @@ def callback(request):
                     event.reply_token,
                     TextSendMessage(text="請輸入有效指令"))
             #elif instance(event, ):
+
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
