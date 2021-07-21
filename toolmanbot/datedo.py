@@ -18,15 +18,15 @@ def datedo_list_generator(date):
 
                         #好感度Button
                         ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
-                                       action=MessageAction(label="目前好感度", text=date+':目前好感度'), )
+                                       action=MessageAction(label="目前好感度", text='目前好感度:'+date), )
 
                         #上傳對話Button(傳送user ID、對話紀錄，提醒後端接收)
                         ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
-                                       action=MessageAction(label="上傳新的對話", text='請開始上傳與「'+date+'」的對話'), )
+                                       action=MessageAction(label="上傳新的對話", text='請開始上傳對話:'+date), )
 
                         #尋找話題Button(傳送user ID，要求回傳top話題list)
                         ,ButtonComponent(style="primary", color="#ff80bb", size="md",height="md" ,margin="lg",
-                                       action=MessageAction(label="尋找話題", text='尋找與「'+date+'」的話題'), )
+                                       action=MessageAction(label="尋找話題", text='尋找話題:'+date), )
                     ])]
 
     bubble=BubbleContainer(
