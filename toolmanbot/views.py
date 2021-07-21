@@ -74,7 +74,7 @@ def callback(request):
                     favorite_list.remove(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象："+event.message.text[5:]))
 
-                elif event.message.text == '訊息測試':
+                elif re.match("尋找話題：", event.message.text):
                     flex_message3=carousel_list(topic)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
