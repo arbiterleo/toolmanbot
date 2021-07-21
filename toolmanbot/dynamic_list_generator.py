@@ -21,9 +21,9 @@ def favorite_list_generator(favorite_list):
     for i in favorite_list:
 
         favorite_button = ButtonComponent(style="primary", color="#ff66a3", size="sm", margin="sm",
-                                        action=MessageAction(label=i, text=f'搜尋對象：{i}'),)
+                                        action=MessageAction(label=i, text=f'搜尋對象:{i}'),)
         delete_button=ButtonComponent(style="secondary", color="#ff3333", size="sm", margin="sm", flex=0,
-                                      action=MessageAction(label="-", text="刪除對象："+i), )
+                                      action=MessageAction(label="-", text="刪除對象:"+i), )
         button_row=BoxComponent(layout="horizontal", margin="md", spacing="sm",
                                 contents=[favorite_button, delete_button])
         button_list.append(button_row)
@@ -31,7 +31,7 @@ def favorite_list_generator(favorite_list):
 #新增按鈕
     add_button=BoxComponent(layout="horizontal", margin="md", spacing="sm",
                             contents=[ButtonComponent(style="primary", color="#ff99c2", size="md", margin="sm",
-                            action=MessageAction(label="+", text='開始新增對象，請輸入「新增對象：對象名稱」'), )])
+                            action=MessageAction(label="+", text='開始新增對象，請輸入「新增對象:對象名稱」'), )])
 
     button_list.append(add_button)
 

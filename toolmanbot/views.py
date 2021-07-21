@@ -61,20 +61,20 @@ def callback(request):
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
-                elif re.match("搜尋對象：", event.message.text):
+                elif re.match("搜尋對象:", event.message.text):
                     date=event.message.text[5:] # 對象名稱(date)
                     flex_message2=FlexSendMessage(alt_text=date,contents=datedo_list_generator(date))
                     line_bot_api.reply_message(event.reply_token, flex_message2)
 
-                elif re.match("新增對象：", event.message.text):
+                elif re.match("新增對象:", event.message.text):
                     favorite_list.append(event.message.text[5:])
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象："+event.message.text[5:]))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象:"+event.message.text[5:]))
 
-                elif re.match("刪除對象：", event.message.text):
+                elif re.match("刪除對象:", event.message.text):
                     favorite_list.remove(event.message.text[5:])
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象："+event.message.text[5:]))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象:"+event.message.text[5:]))
 
-                elif re.match("尋找話題：", event.message.text):
+                elif re.match("尋找話題:", event.message.text):
                     flex_message3=carousel_list(topic)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
