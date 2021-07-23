@@ -60,6 +60,7 @@ def callback(request):
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="是在哈囉"))
 
                 elif event.message.text == '使用者':
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.source.userId.ToString()))
