@@ -63,7 +63,7 @@ def callback(request):
 
                 elif event.message.text == '使用者':
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.source.userId.ToString()))
-
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="是在哈囉"))
 
                 elif re.match("搜尋對象:", event.message.text):
 
