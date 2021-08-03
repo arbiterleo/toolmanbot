@@ -82,7 +82,7 @@ def callback(request):
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="幹你娘:"+user_id))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_id))
 
                 else:
                     line_bot_api.reply_message(  # 回覆傳入的訊息文字
