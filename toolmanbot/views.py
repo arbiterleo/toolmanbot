@@ -54,18 +54,12 @@ def callback(request):
 
         for event in events:
 
-            user_id = event.source.user_id
-
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '最愛清單':
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="是在哈囉"))
-
-                elif event.message.text == '使用者':
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.source.userId.ToString()))
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="是在哈囉"))
 
                 elif re.match("搜尋對象:", event.message.text):
@@ -86,9 +80,9 @@ def callback(request):
                     flex_message3=carousel_list(topic)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
-                elif re.match("使用者", event.message.text):
-      #              user_id = event.source.user_id
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="幹你娘:"))
+                elif event.message.text == '使用者':
+                    user_id = event.source.user_id
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="幹你娘:"+user_id))
 
                 else:
                     line_bot_api.reply_message(  # 回覆傳入的訊息文字
