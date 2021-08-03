@@ -84,12 +84,10 @@ def callback(request):
                     flex_message3=carousel_list(topic)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
-                elif re.match("使用者",event.message.text):
-                  # message = TextSendMessage(text=event.message.text)
+                elif re.match("使用者", event.message.text):
                     user_id = event.source.user_id
-                    #print("user_id =", user_id)
-                    message = TextSendMessage(text="幹你娘")
-                    line_bot_api.reply_message(event.reply_token, message)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="幹你娘:"+user_id))
+
                 else:
                     line_bot_api.reply_message(  # 回覆傳入的訊息文字
                     event.reply_token,
