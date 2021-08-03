@@ -88,7 +88,7 @@ def callback(request):
 
                 elif re.match("使用者", event.message.text):
       #              user_id = event.source.user_id
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="幹你娘:"+user_id))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="幹你娘:"))
 
                 else:
                     line_bot_api.reply_message(  # 回覆傳入的訊息文字
