@@ -54,6 +54,8 @@ def callback(request):
 
         for event in events:
 
+            user_id = event.source.user_id
+
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '最愛清單':
@@ -85,8 +87,8 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 elif re.match("使用者", event.message.text):
-                    user_id = event.source.user_id
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="幹你娘:"))
+      #              user_id = event.source.user_id
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="幹你娘:"+user_id))
 
                 else:
                     line_bot_api.reply_message(  # 回覆傳入的訊息文字
