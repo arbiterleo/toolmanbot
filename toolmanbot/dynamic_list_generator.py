@@ -31,7 +31,7 @@ def favorite_list_generator(favorite_list):
 #新增按鈕
     add_button=BoxComponent(layout="horizontal", margin="md", spacing="sm",
                             contents=[ButtonComponent(style="primary", color="#ff99c2", size="md", margin="sm",
-                            action=MessageAction(label="+", text='開始新增對象，請輸入「新增對象:對象名稱」'), )])
+                            action=MessageAction(label="+", text='開始新增對象，請輸入「新增對象：對象名稱」'), )])
 
     button_list.append(add_button)
 

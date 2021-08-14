@@ -85,7 +85,7 @@ def callback(request):
                     flex_message2=FlexSendMessage(alt_text=date,contents=datedo_list_generator(date))
                     line_bot_api.reply_message(event.reply_token, flex_message2)
 
-                elif re.match("新增對象:", event.message.text):
+                elif re.match("新增對象：", event.message.text):
                     favorite_list.append(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象:"+event.message.text[5:]))
 
