@@ -1,6 +1,6 @@
 from linebot.models import FlexSendMessage
 
-def carousel_list(topic):
+def carousel_list(topic,topic1,topic2,topic3):
   flexmessage3=FlexSendMessage(
     alt_text="carousel",
     contents={
@@ -44,7 +44,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic1相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri": topic1[0] #topic1 連結1
               }
             },
             {
@@ -52,7 +52,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic1相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri": topic1[1] #topic1 連結2
               }
             },
             {
@@ -60,7 +60,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic1相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri": topic1[2] #topic1 連結3
               }
             }
           ]
@@ -103,7 +103,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic2相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri": topic2[0] #topic2 連結1
               }
             },
             {
@@ -111,7 +111,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic2相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri": topic2[1] #topic2 連結2
               }
             },
             {
@@ -119,7 +119,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic2相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri": topic2[2] #topic2 連結3
               }
             }
           ]
@@ -162,7 +162,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic3相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri": topic3[0] #topic3 連結1
               }
             },
             {
@@ -170,7 +170,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic3相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri": topic3[1] #topic3 連結2
               }
             },
             {
@@ -178,7 +178,7 @@ def carousel_list(topic):
               "action": {
                 "type": "uri",
                 "label": "topic3相關時事主題",
-                "uri": "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"
+                "uri":topic3[2] #topic3 連結3
               }
             }
           ]

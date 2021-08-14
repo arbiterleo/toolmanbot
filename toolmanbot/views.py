@@ -30,7 +30,24 @@ line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 favorite_list=["小美","小花"] #最愛清單
+
+#話題主題前三名
 topic=["a","b","c"]
+
+#主題1連結
+topic1=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
+        "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
+        "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
+
+#主題2連結
+topic2=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
+        "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
+        "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
+
+#主題3連結
+topic3=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
+        "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
+        "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
 
 
 @csrf_exempt
@@ -77,7 +94,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象:"+event.message.text[5:]))
 
                 elif re.match("尋找話題:", event.message.text):
-                    flex_message3=carousel_list(topic)
+                    flex_message3=carousel_list(topic,topic1,topic2,topic3)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 elif event.message.text == '使用者':
