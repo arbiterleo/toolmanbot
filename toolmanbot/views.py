@@ -105,7 +105,7 @@ def callback(request):
                     line_bot_api.reply_message(  # 回覆傳入的訊息文字
                     event.reply_token,
                     TextSendMessage(text="請輸入有效指令"))
-            #elif instance(event, ):
+
 
         return HttpResponse()
     else:
