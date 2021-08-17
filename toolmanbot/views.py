@@ -103,10 +103,10 @@ def callback(request):
                     flex_message3=carousel_list(topic,topic1,topic2,topic3)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
-                elif re.match("目前好感度:", event.message.text):
-                    content = draw(imgur_client,attribute)
-                    message = ImageSendMessage(original_content_url=content,preview_image_url=content)
-                    line_bot_api.reply_message(event.reply_token, message)
+#                elif re.match("目前好感度:", event.message.text):
+#                    content = draw(imgur_client,attribute)
+#                    message = ImageSendMessage(original_content_url=content,preview_image_url=content)
+#                    line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
