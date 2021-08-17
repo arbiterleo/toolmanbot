@@ -22,13 +22,13 @@ from linebot.models import (
     MessageAction
     )
 
-#import pyimgur
+import pyimgur
 
 #function
 from .dynamic_list_generator import favorite_list_generator #最愛清單function
 from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
-#from .report import draw
+from .report import draw
 
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
