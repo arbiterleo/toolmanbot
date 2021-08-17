@@ -30,9 +30,8 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 #from .report import draw
 
-
 import numpy as np
-#import matplotlib.pyplot as plt   #問題所在
+import matplotlib.pyplot as plt   #問題所在
 
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -60,11 +59,6 @@ topic2=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
 topic3=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
-
-
-####################
-
-#####################
 
 
 @csrf_exempt

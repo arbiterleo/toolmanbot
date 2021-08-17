@@ -8,4 +8,4 @@ line-bot-sdk==1.19.0
 mccabe==0.6.1
 sqlparse==0.4.1
 pyimgur
-pandas_datareader==0.9.0rc1
+matplotlib
