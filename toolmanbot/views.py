@@ -12,6 +12,7 @@ from linebot.models import (
     MessageEvent,
     TextSendMessage,
     FlexSendMessage,
+    ImageSendMessage,
     TemplateSendMessage,
     ButtonComponent,
     TextComponent,
@@ -21,18 +22,24 @@ from linebot.models import (
     MessageAction
     )
 
+import pyimgur
+
 #function
 from .dynamic_list_generator import favorite_list_generator #最愛清單function
 from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
+from .report import draw
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
+imgur_client=settings.imgur_client_id
+
 favorite_list=["小美","小花"] #最愛清單
 
-#話題主題前三名
-topic=["a","b","c"]
+attribute=['a', 'b', 'c', 'd', 'e', 'f'] #各屬性分數
+
+topic=["a","b","c"]#話題主題前三名
 
 #主題1連結
 topic1=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
@@ -77,10 +84,8 @@ def callback(request):
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="是在哈囉"))
 
                 elif re.match("搜尋對象:", event.message.text):
-
                     date=event.message.text[5:] # 對象名稱(date)
                     flex_message2=FlexSendMessage(alt_text=date,contents=datedo_list_generator(date))
                     line_bot_api.reply_message(event.reply_token, flex_message2)
@@ -96,6 +101,11 @@ def callback(request):
                 elif re.match("尋找話題:", event.message.text):
                     flex_message3=carousel_list(topic,topic1,topic2,topic3)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
+
+                elif re.match("目前好感度:", event.message.text):
+                    content = draw(imgur_client,attribute)
+                    message = ImageSendMessage(original_content_url=content,preview_image_url=content)
+                    line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id

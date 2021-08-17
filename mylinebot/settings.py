@@ -130,5 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LINE_CHANNEL_SECRET = 'e93603f23a91577079b4444b359ded8a'
 LINE_CHANNEL_ACCESS_TOKEN = 'PEgvXyP6nPE8lIgLXAIz2D7Q3xNs4WLNHkELlarlhvBP85r/FnjLSnE+EKVp5reuNstda/i0yWXD0Tbe2IUWyqR3c6ws1t9HK4KIu9jfKS6bC7N2A1M6bLU1jm4Ukd4B4sn5pkj9A4RQgm6ENu3GKgdB04t89/1O/w1cDnyilFU='
 
+#Imgur
+imgur_client_id = 'e00f48cb1956755'
+
 #static folder
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
