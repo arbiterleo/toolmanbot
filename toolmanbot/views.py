@@ -31,7 +31,7 @@ from .carousel import carousel_list
 #from .report import draw
 
 
-#import numpy as np
+import numpy as np
 #import matplotlib.pyplot as plt
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
