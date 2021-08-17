@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.font_manager import FontProperties
 import pyimgur
 
 def draw(CLIENT_ID,attributes):
