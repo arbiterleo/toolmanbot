@@ -22,7 +22,6 @@ from linebot.models import (
     MessageAction
     )
 
-#import pyimgur
 
 #function
 from .dynamic_list_generator import favorite_list_generator #最愛清單function
