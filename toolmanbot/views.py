@@ -28,7 +28,7 @@ import pyimgur
 from .dynamic_list_generator import favorite_list_generator #最愛清單function
 from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
-#from .report import draw
+from .report import draw
 
 import numpy as np
 import matplotlib.pyplot as plt   #問題所在
@@ -106,10 +106,10 @@ def callback(request):
                     flex_message3=carousel_list(topic,topic1,topic2,topic3)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
-#                elif re.match("目前好感度:", event.message.text):
-#                    content = draw(imgur_client,attribute)
-#                    message = ImageSendMessage(original_content_url=content,preview_image_url=content)
-#                    line_bot_api.reply_message(event.reply_token, message)
+                elif re.match("目前好感度:", event.message.text):
+                    content = draw(imgur_client,attribute)
+                    message = ImageSendMessage(original_content_url=content,preview_image_url=content)
+                    line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
