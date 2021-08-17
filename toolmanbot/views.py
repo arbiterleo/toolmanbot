@@ -34,7 +34,7 @@ from .carousel import carousel_list
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-#imgur_client=settings.IMGUR_CLIENT_ID
+imgur_client=settings.IMGUR_CLIENT_ID
 
 favorite_list=["小美","小花"] #最愛清單
 
