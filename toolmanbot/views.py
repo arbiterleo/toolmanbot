@@ -44,7 +44,7 @@ attribute=[-0.1, 0.2, 0.3, 0.4, -0.3, 0.5] #各屬性分數
 
 topic=["a","b","c"]#話題主題前三名
 
-fav=60 #好感度綜合分數
+fav="60" #好感度綜合分數
 
 #主題1連結
 topic1=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
