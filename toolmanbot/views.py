@@ -109,8 +109,7 @@ def callback(request):
                     content = draw(imgur_client,attribute)
 
                     message_arr=[]
-                    message_arr.append(TextSendMessage(text="目前好感度為："+fav+"分，"+" %0D%0A 下圖為各項指標變動趨勢"))
-                    message_arr.append(TextSendMessage(text="下圖為各項指標變動趨勢"))
+                    message_arr.append(TextSendMessage(text="目前好感度為："+fav+"分，"+'//n'+"下圖為各項指標變動趨勢"))
                     message_arr.append(ImageSendMessage(original_content_url=content,preview_image_url=content))
                     line_bot_api.reply_message(event.reply_token, message_arr)
 
