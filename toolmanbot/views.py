@@ -44,7 +44,7 @@ attribute=[-0.1, 0.2, 0.3, 0.4, -0.3, 0.5] #各屬性分數
 
 topic=["a","b","c"]#話題主題前三名
 
-fav=60 #好感度綜合分數
+#fav=60 #好感度綜合分數
 
 #主題1連結
 topic1=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
@@ -77,7 +77,6 @@ def callback(request):
 
         global favorite_list #全域變數
         global topic
-        fav=60
 
         for event in events:
 
@@ -107,6 +106,7 @@ def callback(request):
 
                 elif re.match("目前好感度:", event.message.text):
                     content = draw(imgur_client,attribute)
+                    fav=60
                     message_arr=[]
                     message_arr.append(TextSendMessage(text="你目前的好感度綜合評分為："+fav))
                     message_arr.append(ImageSendMessage(original_content_url=content,preview_image_url=content))
