@@ -115,8 +115,7 @@ def callback(request):
 
                 elif event.message.text == '測試':
                     content="目前好感度"
-                    message=TextSendMessage(text=content+fav)
-                    line_bot_api.reply_message(event.reply_token, message)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content+fav))
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
