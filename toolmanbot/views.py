@@ -115,8 +115,8 @@ def callback(request):
 
                 elif re.match("test", event.message.text):
                     message_arr=[]
-                    message_arr.append(TextSendMessage(text="目前好感度:"))
-                    message_arr.append(TextSendMessage(text=fav))
+                    message_arr.append(TextSendMessage(text="目前好感度:"+fav))
+                    message_arr.append(TextSendMessage(text="你好"))
                     line_bot_api.reply_message(event.reply_token, message_arr)
 
                 elif event.message.text == '使用者':
