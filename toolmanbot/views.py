@@ -30,7 +30,7 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw
 
-#登入linebot 跟 imgur 需要的東西
+#登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 imgur_client=settings.IMGUR_CLIENT_ID
@@ -38,11 +38,11 @@ imgur_client=settings.IMGUR_CLIENT_ID
 #需要從後端得到的東西
 favorite_list=["小美","小花"] #最愛清單
 
-attribute=[-0.1, 0.2, 0.3, 0.4, -0.3, 0.5] #各屬性變動分數(依序為對話頻率,回話速度,情感分析,對話內容量,通話頻率,通話時間)，
-
-topic=["Travel","Sports","Fashion"]#話題主題前三名
+attribute=[-0.1, 0.2, 0.3, 0.4, -0.3, 0.5] #各屬性分數變動量(依序為對話頻率,回話速度,情感分析,對話內容量,通話頻率,通話時間)，
 
 fav="60" #好感度綜合分數(String)
+
+topic=["Travel","Sports","Fashion"] #話題主題前三名
 
 #主題新聞連結
 topic1=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
@@ -56,6 +56,7 @@ topic2=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
 topic3=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
+
 
 @csrf_exempt
 def callback(request):
