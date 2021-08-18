@@ -115,7 +115,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_id))
 
                 else:
-                    line_bot_api.reply_message(  # 回覆傳入的訊息文字
+                    line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text="請輸入有效指令"))
 
