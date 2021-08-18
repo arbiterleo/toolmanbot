@@ -10,7 +10,7 @@ def draw(CLIENT_ID,values):
   plt.rcParams['axes.unicode_minus'] = False
   # 構造數據
 
-  feature = ['對話頻率', '回話速度', '回話內容', '訊息內容量', '通話頻率', '通話時間']
+  feature = [u'對話頻率', u'回話速度', u'回話內容', u'訊息內容量', u'通話頻率', u'通話時間']
 
   # 設置每個數據點的顯示位置，在雷達圖上用角度表示
   angles=np.linspace(0, 2*np.pi,len(values), endpoint=False)
@@ -28,7 +28,7 @@ def draw(CLIENT_ID,values):
   ax.set_thetagrids(angles * 180/np.pi, feature)
 
   # 添加標題
-  plt.title('好感度報表')
+  plt.title(u'好感度報表')
   # 添加網格線
   ax.grid(True)
 

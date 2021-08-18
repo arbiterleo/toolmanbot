@@ -40,7 +40,7 @@ imgur_client=settings.IMGUR_CLIENT_ID
 
 favorite_list=["小美","小花"] #最愛清單
 
-attribute=['0.1', '0.2', '0.3', '0.4', '-0.3', '0.5'] #各屬性分數
+attribute=[-0.1, 0.2, 0.3, 0.4, 0.3, 0.5] #各屬性分數
 
 topic=["a","b","c"]#話題主題前三名
 
