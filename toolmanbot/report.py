@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pyimgur
 
-def draw(CLIENT_ID,attributes):
+def draw(CLIENT_ID,values):
 
   # 用於正常顯示中文
   plt.rcParams['font.sans-serif'] = 'SimHei'
