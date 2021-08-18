@@ -107,7 +107,7 @@ def callback(request):
                 elif re.match("目前好感度:", event.message.text):
                     content = draw(imgur_client,attribute)
                     message_arr=[]
-                    message_arr.append(TextSendMessage(text="你目前的好感度綜合評分為："+fav+"分"))
+                    message_arr.append(TextSendMessage(text="你目前的好感度綜合評分為：60分"))
                     message_arr.append(ImageSendMessage(original_content_url=content,preview_image_url=content))
                     line_bot_api.reply_message(event.reply_token, message_arr)
 
