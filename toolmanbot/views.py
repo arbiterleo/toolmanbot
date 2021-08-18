@@ -77,7 +77,7 @@ def callback(request):
 
         global favorite_list #全域變數
         global topic
-        global fav
+        fav=60
 
         for event in events:
 
