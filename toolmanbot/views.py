@@ -3,9 +3,6 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbid
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
-import json
-import re
-
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import (
@@ -19,9 +16,12 @@ from linebot.models import (
     SeparatorComponent,
     BubbleContainer,
     BoxComponent,
-    MessageAction
-    )
+    MessageAction)
 
+import json
+import re
+import numpy as np
+import matplotlib.pyplot as plt
 import pyimgur
 
 #function
@@ -30,31 +30,29 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw
 
-import numpy as np
-import matplotlib.pyplot as plt   #問題所在
-
-
+#登入linebot 跟 imgur 需要的東西
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 imgur_client=settings.IMGUR_CLIENT_ID
 
+#需要從後端得到的東西
 favorite_list=["小美","小花"] #最愛清單
 
-attribute=[-0.1, 0.2, 0.3, 0.4, -0.3, 0.5] #各屬性分數
+attribute=[-0.1, 0.2, 0.3, 0.4, -0.3, 0.5] #各屬性變動分數(依序為對話頻率,回話速度,情感分析,對話內容量,通話頻率,通話時間)，
 
-topic=["a","b","c"]#話題主題前三名
+topic=["Travel","Sports","Fashion"]#話題主題前三名
 
-fav="60" #好感度綜合分數
+fav="60" #好感度綜合分數(String)
 
-#主題1連結
+#主題新聞連結
 topic1=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
-#主題2連結
+#主題2新聞連結
 topic2=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
-#主題3連結
+#主題3新聞連結
 topic3=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
@@ -107,12 +105,10 @@ def callback(request):
 
                 elif re.match("目前好感度:", event.message.text):
                     content = draw(imgur_client,attribute)
-
                     message_arr=[]
                     message_arr.append(TextSendMessage(text="目前好感度為："+fav+"分，下圖為各項指標變動趨勢"))
                     message_arr.append(ImageSendMessage(original_content_url=content,preview_image_url=content))
                     line_bot_api.reply_message(event.reply_token, message_arr)
-
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
