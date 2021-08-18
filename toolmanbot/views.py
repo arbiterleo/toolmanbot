@@ -109,7 +109,7 @@ def callback(request):
 
                     message_arr=[]
                     fav=60
-                    message_arr.append(TextSendMessage(text="你目前的好感度綜合評分為："+fav))
+                    message_arr.append(TextSendMessage(text=fav))
                     message_arr.append(ImageSendMessage(original_content_url=content,preview_image_url=content))
                     line_bot_api.reply_message(event.reply_token, message_arr)
 
