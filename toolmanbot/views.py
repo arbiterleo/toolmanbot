@@ -118,12 +118,12 @@ def callback(request):
                     message=TextSendMessage(text=content+fav)
                     line_bot_api.reply_message(event.reply_token, message)
 
-                elif re.match("testt", event.message.text):
+                elif event.message.text == "testt":
                     content="目前好感度"
                     message=TextSendMessage(text=content)
                     line_bot_api.reply_message(event.reply_token, message)
 
-                elif re.match("testtt", event.message.text):
+                elif event.message.text == "testtt":
                     message=TextSendMessage(text="目前好感度")
                     line_bot_api.reply_message(event.reply_token, message)
 
