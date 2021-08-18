@@ -123,7 +123,7 @@ def callback(request):
                     message=TextSendMessage(text=content)
                     line_bot_api.reply_message(event.reply_token, message)
 
-                elif event.message.text == "testtt":
+                elif event.message.text == "測試":
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="目前好感度"))
 
                 elif event.message.text == '使用者':
