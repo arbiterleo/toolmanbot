@@ -113,7 +113,7 @@ def callback(request):
                     message_arr.append(ImageSendMessage(original_content_url=content,preview_image_url=content))
                     line_bot_api.reply_message(event.reply_token, message_arr)
 
-                elif re.match("測試", event.message.text):
+                elif event.message.text == '測試':
                     content="目前好感度"
                     message=TextSendMessage(text=content+fav)
                     line_bot_api.reply_message(event.reply_token, message)
