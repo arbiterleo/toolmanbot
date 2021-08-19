@@ -25,12 +25,17 @@ def draw(CLIENT_ID,values,point):
   angles=np.linspace(0, 2*np.pi,len(values), endpoint=False)
   # 設置爲極座標格式
   ax = fig.add_subplot(212, polar=True)
+
+  #使圖形封閉
+  values=np.concatenate((values,[values[0]]))
+  angles=np.concatenate((angles,[angles[0]]))
   # 繪製折線圖
   ax.plot(angles, values, 'o-', linewidth=2)
   # 填充顏色
   ax.fill(angles, values, alpha=0.25)
   # 設置圖標上的角度劃分刻度，爲每個數據點處添加標籤
   ax.set_thetagrids(angles * 180/np.pi, feature)
+
 
   #雷達圖數值分佈
   ax.set_rlim(-2.0, 2.0)
