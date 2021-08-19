@@ -108,7 +108,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 elif re.match("目前好感度:", event.message.text):
-                    content = draw(imgur_client,attribute,point)
+                    content = draw(imgur_client,attribute,point,new_data,pst_data)
                     message=ImageSendMessage(original_content_url=content,preview_image_url=content)
                     line_bot_api.reply_message(event.reply_token, message)
 
