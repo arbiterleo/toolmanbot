@@ -6,7 +6,7 @@ from matplotlib.gridspec import GridSpec
 def draw(CLIENT_ID,values,point,new_data,pst_data):
 
   #上半部
-  img = cv2.imread("./S__17989845.jpg")
+  img = cv2.imread("./toolmanbot/S__17989845.jpg")
   # 文字
   text = point
   cv2.putText(img, text, (300, 320), cv2.FONT_HERSHEY_SIMPLEX,4.5,(201, 148, 255), 8, cv2.LINE_AA)
