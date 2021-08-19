@@ -19,10 +19,8 @@ def draw(CLIENT_ID,values,point):
   ax1.imshow(img)
 
   #下半部
-
   plt.rcParams['axes.unicode_minus'] = False  #用於正常顯示符號
   feature = ['Frequency', 'Speed', 'Contents', 'Amounts', 'Call frequency', 'Call time']
-
   # 設置每個數據點的顯示位置，在雷達圖上用角度表示
   angles=np.linspace(0, 2*np.pi,len(values), endpoint=False)
   # 設置爲極座標格式
@@ -31,19 +29,17 @@ def draw(CLIENT_ID,values,point):
   ax.plot(angles, values, 'o-', linewidth=2)
   # 填充顏色
   ax.fill(angles, values, alpha=0.25)
-
   # 設置圖標上的角度劃分刻度，爲每個數據點處添加標籤
   ax.set_thetagrids(angles * 180/np.pi, feature)
 
+  #雷達圖數值分佈
   ax.set_rlim(-2.0, 2.0)
-
-  # 添加標題
   plt.title(u'Favorability Report')
   # 添加網格線
   ax.grid(True)
 
+  #儲存圖片到imgur
   plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1)
-
   PATH='report.png'
   im = pyimgur.Imgur(CLIENT_ID)
   uploaded_image = im.upload_image(PATH, title="Report")
