@@ -29,6 +29,7 @@ def draw(CLIENT_ID,values,point):
   #使圖形封閉
   values=np.concatenate((values,[values[0]]))
   angles=np.concatenate((angles,[angles[0]]))
+  feature=np.concatenate((feature,[feature[0]]))
   # 繪製折線圖
   ax.plot(angles, values, 'o-', linewidth=2)
   # 填充顏色
