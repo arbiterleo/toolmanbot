@@ -40,7 +40,7 @@ favorite_list=["小美","小花"] #最愛清單
 
 attribute=[-0.1, 0.2, 0.3, 0.4, -0.3, 0.5] #各屬性分數變動量(依序為對話頻率,回話速度,情感分析,對話內容量,通話頻率,通話時間)
 
-fav="60" #好感度綜合分數(String)
+point="60" #好感度綜合分數(String)
 
 topic=["Travel","Sports","Fashion"] #話題主題前三名
 
@@ -105,11 +105,9 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 elif re.match("目前好感度:", event.message.text):
-                    content = draw(imgur_client,attribute)
-                    message_arr=[]
-                    message_arr.append(TextSendMessage(text="目前好感度為："+fav+"分，下圖為各項指標變動趨勢"))
-                    message_arr.append(ImageSendMessage(original_content_url=content,preview_image_url=content))
-                    line_bot_api.reply_message(event.reply_token, message_arr)
+                    content = draw(imgur_client,attribute,point)
+                    message=ImageSendMessage(original_content_url=content,preview_image_url=content)
+                    line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
