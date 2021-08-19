@@ -27,7 +27,7 @@ def draw(CLIENT_ID,values):
   # 設置圖標上的角度劃分刻度，爲每個數據點處添加標籤
   ax.set_thetagrids(angles * 180/np.pi, feature)
 
-  ax.set_rlim(-0.5, 0.5)
+  ax.set_rlim(-2.0, 2.0)
 
   # 添加標題
   plt.title(u'Favorability Report')
