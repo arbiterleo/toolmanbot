@@ -17,8 +17,8 @@ def draw(CLIENT_ID,values,point,new_data,pst_data):
 
   gs=GridSpec(2,2)
 
-  rect = fig.patch
-  rect.set_facecolor((0, 0, 0,0))
+  #rect = fig.patch
+  #rect.set_facecolor((0, 0, 0,0))
 
   ax1=fig.add_subplot(gs[0,0])
   ax1.axis('off')
