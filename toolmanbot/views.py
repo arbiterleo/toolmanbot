@@ -38,12 +38,9 @@ imgur_client=settings.IMGUR_CLIENT_ID
 #需要從後端得到的東西
 favorite_list=["小美","小花"] #最愛清單
 
-attribute=[0.1,0.2,0.3,0.1,0.2,0.1] #各屬性分數變動量(依序為對話頻率,回話速度,情感分析,對話內容量,通話頻率,通話時間)
-
-new_data = [10,20,30,-14,50,-80]
-pst_data = [23,-62,13,40,90,60]
-
-point="60" #好感度綜合分數(String)
+values = [50,91,44,90,50] #各指標本次分數
+point="80"  #本次分數（字串）
+difference="+2.5" #本次分數減掉上次分數的值（字串）
 
 topic=["Travel","Sports","Fashion"] #話題主題前三名
 
@@ -108,7 +105,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 elif re.match("目前好感度:", event.message.text):
-                    content = draw(imgur_client,attribute,point,new_data,pst_data)
+                    content = draw(imgur_client,values,point,difference)
                     message=ImageSendMessage(original_content_url=content,preview_image_url=content)
                     line_bot_api.reply_message(event.reply_token, message)
 

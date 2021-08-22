@@ -2,58 +2,118 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pyimgur
 import cv2
-from matplotlib.gridspec import GridSpec
-def draw(CLIENT_ID,values,point,new_data,pst_data):
+import requests
+import io
+from PIL import Image
 
-  #上半部
-  img = cv2.imread("./toolmanbot/S__17989845.jpg")
-  # 文字
-  text = point
-  cv2.putText(img, text, (300, 320), cv2.FONT_HERSHEY_SIMPLEX,4.5,(201, 148, 255), 8, cv2.LINE_AA)
-  # 將 BGR 圖片轉為 RGB 圖片
-  img = img[:,:,::-1]
-  # 繪圖
-  fig=plt.figure(figsize=(8,8))
-
-  gs=GridSpec(2,2)
-
-  #rect = fig.patch
-  #rect.set_facecolor((0, 0, 0,0))
-
-  ax1=fig.add_subplot(gs[0,0])
-  ax1.axis('off')
-  ax1.imshow(img)
-  #圓餅圖
-  feature = ['Frequency', 'Speed', 'Contents', 'Amounts', 'Call frequency', 'Call time']
-
-  ax = fig.add_subplot(gs[0,1])
-  #color = ['#E6CAFF', '#F1E1FF', '#97CBFF', '#ACD6FF','#AAAAFF', '#D3A4FF']
-  color = ['#FFC1E0','#FFD9EC',  '#FF95CA', '#FF60AF','#FF0080', '#FF95CA']
-  ax.pie(values,colors=color,labels = feature[0:6],autopct = "%1.2f%%",pctdistance = 0.6)
-  plt.axis('equal')                                          # 使圓餅圖比例相等
-  #plt.legend(loc = "best")
-  # 添加標題
-  plt.title("Feature's weight Report")
-
-  ax2 = fig.add_subplot(gs[1,:])
-  x = np.arange(0, 6)
-
-  ax2.bar(x+0.1, new_data, width = 0.2,color=(1,0,0.5))
-  ax2.bar(x-0.1, pst_data, width = 0.2,color=(1,0.76,0.88))
-  ax2.set_axisbelow(True)
-  ax2.yaxis.grid(color='gray', linestyle='dashed', alpha=0.2)
-  ax2.set_ylim(-100, 100)
-  plt.xticks(x,feature)
-  plt.title("Points (Now v.s Past)")
-  plt.legend(["Now","Past"])
+def draw(CLIENT_ID,values,point,difference):
 
 
+  #圖表
+  features = ['Frequency','Speed','Contents','Amounts','Call']
+  data_length = len(values)
+  angles = np.linspace(0,2*np.pi,data_length,endpoint=False)
+  values = np.concatenate((values,[values[0]]))
+  angles = np.concatenate((angles,[angles[0]]))
+  features = np.concatenate((features,[features[0]]))
+  theta = np.linspace(0,np.pi*2,6)
+
+
+  values1=[(values[0]+values[1])/2,(values[2]+values[3])/2,values[4]]
+  max1=max(values1)
+  values2=values1.copy()
+  values2[np.argmax(values2)]=np.min(values1)
+  max2=max(values2)
+
+  if max1-max2 >10:
+    plt.polar(theta,values,color="#8BCCD0",marker='.')
+    plt.xticks(theta,features)
+    plt.fill(theta,values,color="#56F1D7")
+    plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
+    PATH='report.png'
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title="Report")
+    img_response = requests.get(uploaded_image.link)
+    imageB = Image.open(io.BytesIO(img_response.content))
+    imageB = imageB.convert('RGBA')
+    widthB , heightB = imageB.size
+#Unicorn
+    if max(values1)==values1[0]:
+        imageA = cv2.imread('./toolmanbot/unicorn.png')
+        text = point
+        cv2.putText(imageA, text, (7, 195), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3.4,(0, 0, 0), 6, cv2.LINE_AA)
+        text1 = difference
+        cv2.putText(imageA, text1, (135, 190), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 116, 226), 1, cv2.LINE_AA)
+        imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
+        imageA = imageA.convert('RGBA')
+        widthA , heightA = imageA.size
+
+#PloarBear
+    elif max(values1)==values1[1]:
+        imageA = cv2.imread('./toolmanbot/polarbear.png')
+        text = point
+        cv2.putText(imageA, text, (5, 150), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3.4,(0, 0, 0), 6, cv2.LINE_AA)
+        text1 = difference
+        cv2.putText(imageA, text1, (85, 170), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 116, 226), 1, cv2.LINE_AA)
+        imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
+        imageA = imageA.convert('RGBA')
+        widthA , heightA = imageA.size
+
+#Peacock
+    elif max(values1)==values1[2]:
+        imageA = cv2.imread('./toolmanbot/peacock.png')
+        text = point
+        cv2.putText(imageA, text, (45, 155), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3.4,(0, 0, 0), 6, cv2.LINE_AA)
+        text1 = difference
+        cv2.putText(imageA, text1, (120, 180), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 116, 226), 1, cv2.LINE_AA)
+        imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
+        imageA = imageA.convert('RGBA')
+        widthA , heightA = imageA.size
+
+#deer
+  else:
+    plt.polar(theta,values,color="#000000")
+    plt.xticks(theta,features)
+    plt.fill(theta,values,color="#DD2D57")
+    plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
+    PATH='report.png'
+    im = pyimgur.Imgur("e00f48cb1956755")
+    uploaded_image = im.upload_image(PATH, title="Report")
+    img_response = requests.get(uploaded_image.link)
+    imageB = Image.open(io.BytesIO(img_response.content))
+    imageB = imageB.convert('RGBA')
+    widthB , heightB = imageB.size
+    imageA = cv2.imread('./toolmanbot/deer.png')
+    text = point
+    cv2.putText(imageA, text, (40, 110), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3.4,(0, 0, 0), 6, cv2.LINE_AA)
+    text1 = difference
+    cv2.putText(imageA, text1, (105, 130), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 226, 195), 1, cv2.LINE_AA)
+    imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
+    imageA = imageA.convert('RGBA')
+    widthA , heightA = imageA.size
+
+#重設簽名檔的寬為照片的1/2
+  newWidthB = int(widthA/2)
+#重設簽名檔的高依據新的寬度等比例縮放
+  newHeightB = int(heightB/widthB*newWidthB)
+#重設簽名檔圖片
+  imageB_resize = imageB.resize((newWidthB, newHeightB))
+#新建一個透明的底圖
+  resultPicture = Image.new('RGBA', imageA.size, (0, 0, 0, 0))
+#把照片貼到底圖
+  resultPicture.paste(imageA,(0,0))
+#設定簽名檔的位置參數
+  right_bottom = (widthA - newWidthB, heightA - newHeightB)
+#為了背景保留透明度，將im參數與mask參數皆帶入重設過後的簽名檔圖片
+  resultPicture.paste(imageB_resize, right_bottom, imageB_resize)
+#儲存新的照片
+  resultPicture.save("report.png")
   #儲存圖片到imgur
-  plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1)
+  #plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1)
   PATH='report.png'
   im = pyimgur.Imgur(CLIENT_ID)
   uploaded_image = im.upload_image(PATH, title="Report")
-
+  print(uploaded_image.link)
   return uploaded_image.link
 
 
