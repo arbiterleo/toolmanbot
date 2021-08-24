@@ -29,6 +29,7 @@ from .dynamic_list_generator import favorite_list_generator #最愛清單functio
 from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw
+from .TextTemplate import instrution_content
 
 #登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -41,6 +42,7 @@ favorite_list=["小美","小花"] #最愛清單
 values = [50,91,44,90,50] #各指標本次分數
 point="80"  #本次分數（字串）
 difference="+2.5" #本次分數減掉上次分數的值（字串）
+
 
 topic=["Travel","Sports","Fashion"] #話題主題前三名
 
@@ -86,6 +88,9 @@ def callback(request):
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
+
+                elif event.message.text == '報表說明':
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
 
                 elif re.match("搜尋對象:", event.message.text):
                     date=event.message.text[5:] # 對象名稱(date)

@@ -37,6 +37,7 @@ def draw(CLIENT_ID,values,point,difference):
     imageB = Image.open(io.BytesIO(img_response.content))
     imageB = imageB.convert('RGBA')
     widthB , heightB = imageB.size
+
 #Unicorn
     if max(values1)==values1[0]:
         imageA = cv2.imread('./toolmanbot/unicorn.png')
@@ -115,6 +116,3 @@ def draw(CLIENT_ID,values,point,difference):
   uploaded_image = im.upload_image(PATH, title="Report")
   print(uploaded_image.link)
   return uploaded_image.link
-
-
-
