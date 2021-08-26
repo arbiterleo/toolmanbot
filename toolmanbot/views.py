@@ -28,8 +28,10 @@ import pyimgur
 from .dynamic_list_generator import favorite_list_generator #最愛清單function
 from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
-from .report import draw
+from .report import draw,text_report
 from .TextTemplate import instrution_content
+
+
 
 #登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -40,9 +42,13 @@ imgur_client=settings.IMGUR_CLIENT_ID
 favorite_list=["小美","小花"] #最愛清單
 
 values = [50,91,44,90,50] #各指標本次分數
-point="80"  #本次分數（字串）
-difference="+2.5" #本次分數減掉上次分數的值（字串）
+values_p= [35,80,60,50,90] #各指標前次分數
 
+get_point_a=80  #本次分數
+get_point_b=77.5 #上次分數
+
+point=str(get_point_a)
+difference=str(get_point_a-get_point_b)
 
 topic=["Travel","Sports","Fashion"] #話題主題前三名
 
@@ -110,9 +116,14 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 elif re.match("目前好感度:", event.message.text):
-                    content = draw(imgur_client,values,point,difference)
-                    message=ImageSendMessage(original_content_url=content,preview_image_url=content)
-                    line_bot_api.reply_message(event.reply_token, message)
+                    reply_arr=[]
+                    t_content=text_report(values,values_p)
+                    txt=TextSendMessage(text=t_content)
+                    reply_arr.append(txt)
+                    i_content = draw(imgur_client,values,point,difference)
+                    img=ImageSendMessage(original_content_url=i_content,preview_image_url=i_content)
+                    reply_arr.append(img)
+                    line_bot_api.reply_message(event.reply_token, reply_arr)
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id

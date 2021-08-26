@@ -18,7 +18,6 @@ def draw(CLIENT_ID,values,point,difference):
   features = np.concatenate((features,[features[0]]))
   theta = np.linspace(0,np.pi*2,6)
 
-
   values1=[(values[0]+values[1])/2,(values[2]+values[3])/2,values[4]]
   max1=max(values1)
   values2=values1.copy()
@@ -116,3 +115,40 @@ def draw(CLIENT_ID,values,point,difference):
   uploaded_image = im.upload_image(PATH, title="Report")
   print(uploaded_image.link)
   return uploaded_image.link
+
+
+def text_report(values,values_p):
+
+  values1=[(values[0]+values[1])/2,(values[2]+values[3])/2,values[4]]
+  values2=[(values_p[0]+values_p[1])/2,(values_p[2]+values_p[3])/2,values_p[4]]
+
+  text_description=[]
+
+  for i in range(len(values1)):
+    if values1[i]>=values2[i]:
+
+      if values1[i]-values2[i]>=20:
+        text_description.append("進步幅度：高")
+
+      elif values1[i]-values2[i]>=10:
+        text_description.append("進步幅度：中")
+
+      else:
+       text_description.append("進步幅度：低")
+
+    else:
+      if values2[i]-values1[i]>=20:
+        text_description.append("退步幅度：高")
+
+      elif values2[i]-values1[i]>=10:
+        text_description.append("退步幅度：中")
+
+      else:
+       text_description.append("退步幅度：低")
+
+  description =f"回話速度＆頻率的{text_description[0]}\
+                \n回話內容＆情感的{text_description[1]}\
+                \n通話時間＆頻率的{text_description[2]}"
+  print(description)
+  return description
+
