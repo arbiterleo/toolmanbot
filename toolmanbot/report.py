@@ -85,7 +85,7 @@ def draw(CLIENT_ID,values,point,difference):
     widthB , heightB = imageB.size
     imageA = cv2.imread('./toolmanbot/deer.png')
     text = point
-    cv2.putText(imageA, text, (40, 110), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,1.75,(0, 0, 0), 4, cv2.LINE_AA)
+    cv2.putText(imageA, text, (50, 110), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,1.75,(0, 0, 0), 4, cv2.LINE_AA)
     text1 = difference
     cv2.putText(imageA, text1, (105, 130), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 226, 195), 1, cv2.LINE_AA)
     imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
