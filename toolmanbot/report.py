@@ -41,7 +41,7 @@ def draw(CLIENT_ID,values,point,difference):
     if max(values1)==values1[0]:
         imageA = cv2.imread('./toolmanbot/unicorn.png')
         text = point
-        cv2.putText(imageA, text, (7, 195), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3.4,(0, 0, 0), 6, cv2.LINE_AA)
+        cv2.putText(imageA, text, (7, 195), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3,(0, 0, 0), 6, cv2.LINE_AA)
         text1 = difference
         cv2.putText(imageA, text1, (135, 190), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 116, 226), 1, cv2.LINE_AA)
         imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
@@ -52,7 +52,7 @@ def draw(CLIENT_ID,values,point,difference):
     elif max(values1)==values1[1]:
         imageA = cv2.imread('./toolmanbot/polarbear.png')
         text = point
-        cv2.putText(imageA, text, (5, 150), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3.4,(0, 0, 0), 6, cv2.LINE_AA)
+        cv2.putText(imageA, text, (5, 150), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3,(0, 0, 0), 6, cv2.LINE_AA)
         text1 = difference
         cv2.putText(imageA, text1, (85, 170), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 116, 226), 1, cv2.LINE_AA)
         imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
@@ -63,14 +63,14 @@ def draw(CLIENT_ID,values,point,difference):
     elif max(values1)==values1[2]:
         imageA = cv2.imread('./toolmanbot/peacock.png')
         text = point
-        cv2.putText(imageA, text, (45, 155), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3.4,(0, 0, 0), 6, cv2.LINE_AA)
+        cv2.putText(imageA, text, (45, 155), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3,(0, 0, 0), 6, cv2.LINE_AA)
         text1 = difference
         cv2.putText(imageA, text1, (120, 180), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 116, 226), 1, cv2.LINE_AA)
         imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
         imageA = imageA.convert('RGBA')
         widthA , heightA = imageA.size
 
-#deer
+#Deer
   else:
     plt.polar(theta,values,color="#000000")
     plt.xticks(theta,features)
@@ -85,7 +85,7 @@ def draw(CLIENT_ID,values,point,difference):
     widthB , heightB = imageB.size
     imageA = cv2.imread('./toolmanbot/deer.png')
     text = point
-    cv2.putText(imageA, text, (40, 110), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3.4,(0, 0, 0), 6, cv2.LINE_AA)
+    cv2.putText(imageA, text, (40, 110), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,3,(0, 0, 0), 6, cv2.LINE_AA)
     text1 = difference
     cv2.putText(imageA, text1, (105, 130), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 226, 195), 1, cv2.LINE_AA)
     imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
