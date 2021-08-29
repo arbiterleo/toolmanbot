@@ -44,7 +44,7 @@ favorite_list=["小美","小花"] #最愛清單
 values = [50,91,44,90,50] #各指標本次分數
 values_p= [35,80,60,50,90] #各指標前次分數
 
-get_point_a=80  #本次分數
+get_point_a=80.5  #本次分數
 get_point_b=77.5 #上次分數
 
 point=str(get_point_a)
