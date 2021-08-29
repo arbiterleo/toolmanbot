@@ -54,7 +54,7 @@ def draw(CLIENT_ID,values,point,difference):
         text = point
         cv2.putText(imageA, text, (15, 140), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,1.8,(0, 0, 0), 4, cv2.LINE_AA)
         text1 = difference
-        cv2.putText(imageA, text1, (120, 170), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 116, 226), 1, cv2.LINE_AA)
+        cv2.putText(imageA, text1, (105, 170), cv2.FONT_HERSHEY_COMPLEX,0.55,(22, 116, 226), 1, cv2.LINE_AA)
         imageA = Image.fromarray(cv2.cvtColor(imageA,cv2.COLOR_BGR2RGB))
         imageA = imageA.convert('RGBA')
         widthA , heightA = imageA.size
