@@ -149,6 +149,6 @@ def text_report(values,values_p):
   description =f"回話速度＆頻率的{text_description[0]}\
                 \n回話內容＆情感的{text_description[1]}\
                 \n通話時間＆頻率的{text_description[2]}"
-  print(description)
+  
   return description
 
