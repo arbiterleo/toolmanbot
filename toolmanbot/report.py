@@ -6,28 +6,32 @@ import requests
 import io
 from PIL import Image
 
-def draw(CLIENT_ID,values,point,difference):
-
+def draw(CLIENT_ID,values,values_a,point,difference):
 
   #圖表
-  features = ['Frequency','Speed','Contents','Amounts','Call']
+  features = ['Frequency','Speed','Contents','Amounts','Call time','Call frequency']
   data_length = len(values)
   angles = np.linspace(0,2*np.pi,data_length,endpoint=False)
   values = np.concatenate((values,[values[0]]))
+  values_a= np.concatenate((values_a,[values_a[0]]))
   angles = np.concatenate((angles,[angles[0]]))
   features = np.concatenate((features,[features[0]]))
   theta = np.linspace(0,np.pi*2,6)
-
-  values1=[(values[0]+values[1])/2,(values[2]+values[3])/2,values[4]]
+ 
+  #原指標分數轉成類型分數
+  values1=[(values[0]+values[1])/2,(values[2]+values[3])/2,(values[4]+values[5])/2]
   max1=max(values1)
   values2=values1.copy()
   values2[np.argmax(values2)]=np.min(values1)
   max2=max(values2)
 
   if max1-max2 >10:
+    plt.tick_params('y', labelleft=False)
     plt.polar(theta,values,color="#8BCCD0",marker='.')
+    plt.polar(theta,values_a,marker='.')
     plt.xticks(theta,features)
     plt.fill(theta,values,color="#56F1D7")
+    plt.fill(theta,values_a)
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
     im = pyimgur.Imgur(CLIENT_ID)
@@ -72,9 +76,12 @@ def draw(CLIENT_ID,values,point,difference):
 
 #Deer
   else:
+    plt.tick_params('y', labelleft=False)
     plt.polar(theta,values,color="#000000")
+    plt.polar(theta,values_a)
     plt.xticks(theta,features)
     plt.fill(theta,values,color="#DD2D57")
+    plt.fill(theta,values_a)
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
     im = pyimgur.Imgur("e00f48cb1956755")

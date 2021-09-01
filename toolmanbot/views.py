@@ -18,11 +18,10 @@ from linebot.models import (
     BoxComponent,
     MessageAction)
 
-import json
 import re
 import numpy as np
 import matplotlib.pyplot as plt
-import pyimgur
+
 
 #function
 from .dynamic_list_generator import favorite_list_generator #最愛清單function
@@ -32,17 +31,18 @@ from .report import draw,text_report
 from .TextTemplate import instrution_content
 
 
-
 #登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 imgur_client=settings.IMGUR_CLIENT_ID
 
+
 #需要從後端得到的東西
 favorite_list=["小美","小花"] #最愛清單
 
-values = [20,31,24,80,80] #各指標本次分數
-values_p= [35,80,60,50,90] #各指標前次分數
+values = [20,31,24,80,80,50] #各指標本次分數
+values_p= [35,80,60,50,70,40] #各指標前次分數
+values_a= [40,50,12,70,90,60] #各指標平均分數
 
 get_point_a=80.5  #本次分數
 get_point_b=77.5 #上次分數
@@ -52,7 +52,7 @@ difference=str(get_point_a-get_point_b)
 
 topic=["Travel","Sports","Fashion"] #話題主題前三名
 
-#主題新聞連結
+#主題1新聞連結
 topic1=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
         "https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A"]
@@ -120,7 +120,7 @@ def callback(request):
                     t_content=text_report(values,values_p)
                     txt=TextSendMessage(text=t_content)
                     reply_arr.append(txt)
-                    i_content = draw(imgur_client,values,point,difference)
+                    i_content = draw(imgur_client,values,values_a,point,difference)
                     img=ImageSendMessage(original_content_url=i_content,preview_image_url=i_content)
                     reply_arr.append(img)
                     line_bot_api.reply_message(event.reply_token, reply_arr)
