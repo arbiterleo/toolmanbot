@@ -41,7 +41,7 @@ imgur_client=settings.IMGUR_CLIENT_ID
 favorite_list=["小美","小花"] #最愛清單
 
 values = [20,31,24,80,80,50] #各指標本次分數
-values_p= [35,80,60,50,70,40] #各指標前次分數
+values_p= [35,80,60,50,70,30] #各指標前次分數
 values_a= [40,50,12,70,90,60] #各指標平均分數
 
 get_point_a=80.5  #本次分數
