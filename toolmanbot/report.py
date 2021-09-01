@@ -105,7 +105,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
 #重設簽名檔圖片
   imageB_resize = imageB.resize((newWidthB, newHeightB))
 #新建一個透明的底圖
-  resultPicture = Image.new('RGBA', imageA.size, (255, 255, 255,1))
+  resultPicture = Image.new('RGBA', imageA.size, (255, 255, 255,0))
 #把照片貼到底圖
   resultPicture.paste(imageA,(0,0))
 #設定簽名檔的位置參數
