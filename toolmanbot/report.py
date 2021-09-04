@@ -30,7 +30,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
     plt.polar(theta,values_a,color="#7E7E7E",marker='.')
     plt.xticks(theta,features)
     plt.fill(theta,values_a,color="#E3E3E3",alpha=0.5)
-    plt.fill(theta,values,color="#56F1D7",alpha=0.5)
+    plt.fill(theta,values,color="#56F1D7",alpha=1)
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
     im = pyimgur.Imgur(CLIENT_ID)
@@ -105,7 +105,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
 #重設簽名檔圖片
   imageB_resize = imageB.resize((newWidthB, newHeightB))
 #新建一個透明的底圖
-  resultPicture = Image.new('RGBA', imageA.size, (255, 255, 255,0))
+  resultPicture = Image.new('RGBA', imageA.size, (255, 255, 255,1))
 #把照片貼到底圖
   resultPicture.paste(imageA,(0,0))
 #設定簽名檔的位置參數
