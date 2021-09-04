@@ -33,7 +33,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
     ax.fill(angles, values_a,color="#F5F5F5", alpha=1)
 
     ax.plot(angles, values, 'o-', linewidth=2,color="#579598", label = 'User')
-    ax.fill(angles, values,color="#00FFD4", alpha=0.75)
+    ax.fill(angles, values,color="#00FFD4", alpha=0.9)
 
     plt.xticks(theta,features)
     plt.legend(bbox_to_anchor=(1.15, 1),loc='upper right')
