@@ -34,10 +34,10 @@ def draw(CLIENT_ID,values,values_a,point,difference):
     fig=plt.figure()
     ax = fig.add_subplot(111, polar=True)
 
-    ax.plot(angles, values_a, 'o-', linewidth=2,color="#7E7E7E", label = "User")
+    ax.plot(angles, values_a, 'o-', linewidth=2,color="#7E7E7E", label = "Avg")
     ax.fill(angles, values_a,color="#F5F5F5", alpha=1)
 
-    ax.plot(angles, values, 'o-', linewidth=2,color="#579598", label = 'Avg')
+    ax.plot(angles, values, 'o-', linewidth=2,color="#579598", label = 'User')
     ax.fill(angles, values,color="#00FFD4", alpha=0.75)
 
     plt.xticks(theta,features)
