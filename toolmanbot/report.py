@@ -26,11 +26,6 @@ def draw(CLIENT_ID,values,values_a,point,difference):
   max2=max(values2)
 
   if max1-max2 >10:
-    #plt.polar(theta,values_a,'o-', linewidth=2,color="#7E7E7E",label="Avg")
-    #plt.fill(theta,values_a,color="#F5F5F5",alpha=1)
-    #plt.polar(theta,values,'o-', linewidth=2,color="#579598",label="User")
-    #plt.fill(theta,values,color="#00FFD4",alpha=0.75) 
-    #plt.xticks(theta,features)
     fig=plt.figure()
     ax = fig.add_subplot(111, polar=True)
 
@@ -86,12 +81,15 @@ def draw(CLIENT_ID,values,values_a,point,difference):
 
 #Deer
   else:
-    plt.tick_params('y', labelleft=False)
-    plt.polar(theta,values,color="#000000")
-    plt.polar(theta,values_a,color="#7E7E7E",marker='.')
+    fig=plt.figure()
+    ax = fig.add_subplot(111, polar=True)
+    ax.plot(angles, values_a, 'o-', linewidth=2,color="#7E7E7E", label = "Avg")
+    ax.fill(angles, values_a,color="#C7C7C7", alpha=1)
+    ax.plot(angles, values, 'o-', linewidth=2,color="#000000", label = 'User')
+    ax.fill(angles, values,color="#DD2D57", alpha=0.75)
+
     plt.xticks(theta,features)
-    plt.fill(theta,values,color="#DD2D57",alpha=0.5)
-    #plt.fill(theta,values_a,color="#C7C7C7",alpha=0.5)
+    plt.legend(loc='best')
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
     im = pyimgur.Imgur("e00f48cb1956755")
