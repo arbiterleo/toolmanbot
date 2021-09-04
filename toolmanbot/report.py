@@ -36,7 +36,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
     ax.fill(angles, values,color="#00FFD4", alpha=0.75)
 
     plt.xticks(theta,features)
-    plt.legend(loc='best')
+    plt.legend(bbox_to_anchor=(1.15, 1),loc='upper right')
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
     im = pyimgur.Imgur(CLIENT_ID)
@@ -89,7 +89,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
     ax.fill(angles, values,color="#FF3434", alpha=0.75)
 
     plt.xticks(theta,features)
-    plt.legend(bbox_to_anchor=(1.2, 1),loc='upper right')
+    plt.legend(bbox_to_anchor=(1.15, 1),loc='upper right')
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
     im = pyimgur.Imgur("e00f48cb1956755")
