@@ -26,10 +26,22 @@ def draw(CLIENT_ID,values,values_a,point,difference):
   max2=max(values2)
 
   if max1-max2 >10:
-    plt.polar(theta,values_a,'o-', linewidth=2,color="#7E7E7E",label="Avg")
+    #plt.polar(theta,values_a,'o-', linewidth=2,color="#7E7E7E",label="Avg")
     #plt.fill(theta,values_a,color="#F5F5F5",alpha=1)
-    plt.polar(theta,values,'o-', linewidth=2,color="#579598",label="User")
+    #plt.polar(theta,values,'o-', linewidth=2,color="#579598",label="User")
     #plt.fill(theta,values,color="#00FFD4",alpha=0.75) 
+    #plt.xticks(theta,features)
+    fig=plt.figure()
+    ax = fig.add_subplot(111, polar=True)
+# 绘制折线图
+    ax.plot(angles, values, 'o-', linewidth=2, label = 'Avg')
+# 填充颜色
+    ax.fill(angles, values, alpha=0.25)
+# 绘制第二条折线图
+    ax.plot(angles, values_a, 'o-', linewidth=2, label = "User")
+    ax.fill(angles, values_a, alpha=0.25)
+
+
     plt.xticks(theta,features)
     plt.legend(loc='best')
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
