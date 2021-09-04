@@ -30,8 +30,8 @@ def draw(CLIENT_ID,values,values_a,point,difference):
     plt.polar(theta,values_a,color="#7E7E7E",marker='.')
     plt.xticks(theta,features)
     plt.fill(theta,values_a,color="#E3E3E3",alpha=0.5)
-    plt.fill(theta,values,color="#56F1D7",alpha=0.5)
-    plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = False)
+    plt.fill(theta,values,color="#00FFD4",alpha=0.5)
+    plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
     im = pyimgur.Imgur(CLIENT_ID)
     uploaded_image = im.upload_image(PATH, title="Report")
