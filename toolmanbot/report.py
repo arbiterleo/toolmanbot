@@ -26,12 +26,12 @@ def draw(CLIENT_ID,values,values_a,point,difference):
   max2=max(values2)
 
   if max1-max2 >10:
-    plt.polar(theta,values_a,'o-', linewidth=2,color="#7E7E7E",label="Avg")
-    plt.fill(theta,values_a,color="#F5F5F5",alpha=1)
-    plt.polar(theta,values,'o-', linewidth=2,color="#579598",label="User")
-    plt.fill(theta,values,color="#00FFD4",alpha=0.75) 
+    line1, = plt.polar(theta,values_a,'o-', linewidth=2,color="#7E7E7E",label="Avg")
+    #plt.fill(theta,values_a,color="#F5F5F5",alpha=1)
+    line2, = plt.polar(theta,values,'o-', linewidth=2,color="#579598",label="User")
+    #plt.fill(theta,values,color="#00FFD4",alpha=0.75) 
     plt.xticks(theta,features)
-    plt.legend(loc='best')
+    plt.legend(handles = [line1, line2],loc='best')
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
     im = pyimgur.Imgur(CLIENT_ID)
