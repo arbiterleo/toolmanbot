@@ -29,7 +29,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
     plt.polar(theta,values,color="#579598",marker='.')
     plt.polar(theta,values_a,color="#7E7E7E",marker='.')
     plt.xticks(theta,features)
-    plt.fill(theta,values_a,color="#F5F5F5",alpha=0.75)
+    plt.fill(theta,values_a,color="#F5F5F5",alpha=1)
     plt.fill(theta,values,color="#00FFD4",alpha=0.5)
     plt.savefig('report.png', bbox_inches='tight', pad_inches=0.1,transparent = True)
     PATH='report.png'
