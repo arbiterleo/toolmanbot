@@ -26,8 +26,8 @@ def draw(CLIENT_ID,values,values_a,point,difference):
   max2=max(values2)
 
   if max1-max2 >10:
-    plt.polar(theta,values,color="#579598", maker='.', linewidth=2,label="You")
-    plt.polar(theta,values_a,color="#D5D5D5",marker= '.', linewidth=2,label="Avg")
+    plt.polar(theta,values,color="#579598", maker='.',label="You")
+    plt.polar(theta,values_a,color="#D5D5D5",marker= '.',label="Avg")
     plt.xticks(theta,features)
     plt.fill(theta,values_a,color="#F5F5F5",alpha=1)
     plt.fill(theta,values,color="#00FFD4",alpha=0.75)
