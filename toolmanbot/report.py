@@ -6,6 +6,7 @@ import requests
 import io
 from PIL import Image
 
+
 def draw(CLIENT_ID,values,values_a,point,difference):
 
   #圖表
@@ -17,7 +18,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
   angles = np.concatenate((angles,[angles[0]]))
   features = np.concatenate((features,[features[0]]))
   theta = np.linspace(0,np.pi*2,7)
- 
+
   #原指標分數轉成類型分數
   values1=[(values[0]+values[1])/2,(values[2]+values[3])/2,(values[4]+values[5])/2]
   max1=max(values1)
@@ -86,7 +87,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
     ax.plot(angles, values_a, 'o-', linewidth=2,color="#9C0CC7", label = "Avg")
     ax.fill(angles, values_a,color="#E09EF4", alpha=1)
     ax.plot(angles, values, 'o-', linewidth=2,color="#C70909", label = 'User')
-    ax.fill(angles, values,color="#FF3434", alpha=0.75)
+    ax.fill(angles, values,color="#FF3434", alpha=0.9)
 
     plt.xticks(theta,features)
     plt.legend(bbox_to_anchor=(1.15, 1),loc='upper right')
@@ -163,6 +164,6 @@ def text_report(values,values_p):
   description =f"回話速度＆頻率的{text_description[0]}\
                 \n回話內容＆情感的{text_description[1]}\
                 \n通話時間＆頻率的{text_description[2]}"
-  
+
   return description
 
