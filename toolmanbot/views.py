@@ -92,9 +92,9 @@ def callback(request):
 
                 user_id = event.source.user_id #使用者id
 
-                if event.message.text == '最愛清單':
+                if event.message.text == '分析名單':
                     favorite_list_button=favorite_list_generator(favorite_list)
-                    flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
+                    flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
                 elif event.message.text == '報表說明':
