@@ -13,7 +13,7 @@ def favorite_list_generator(favorite_list):
                     margin="sm",
                     spacing="sm",
                     contents=[
-                        TextComponent(text="最愛清單", weight="bold", size="xxl", margin="sm", wrap=True,),
+                        TextComponent(text="分析名單", weight="bold", size="xxl", margin="sm", wrap=True,),
                         SeparatorComponent(margin = "lg")
                     ])]
 
