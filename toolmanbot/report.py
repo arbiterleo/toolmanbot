@@ -6,7 +6,7 @@ import requests
 import io
 from PIL import Image
 
-
+###好感度報表###
 def draw(CLIENT_ID,values,values_a,point,difference):
 
   #圖表
@@ -27,12 +27,11 @@ def draw(CLIENT_ID,values,values_a,point,difference):
   max2=max(values2)
 
   if max1-max2 >10:
+
     fig=plt.figure()
     ax = fig.add_subplot(111, polar=True)
-
     ax.plot(angles, values_a, 'o-', linewidth=2,color="#7E7E7E", label = "Avg")
     ax.fill(angles, values_a,color="#F5F5F5", alpha=1)
-
     ax.plot(angles, values, 'o-', linewidth=2,color="#579598", label = 'User')
     ax.fill(angles, values,color="#00FFD4", alpha=0.9)
 
@@ -82,6 +81,7 @@ def draw(CLIENT_ID,values,values_a,point,difference):
 
 #Deer
   else:
+
     fig=plt.figure()
     ax = fig.add_subplot(111, polar=True)
     ax.plot(angles, values_a, 'o-', linewidth=2,color="#9C0CC7", label = "Avg")
@@ -132,32 +132,29 @@ def draw(CLIENT_ID,values,values_a,point,difference):
   return uploaded_image.link
 
 
+
+###好感度文字說明###
 def text_report(values,values_p):
 
   values1=[(values[0]+values[1])/2,(values[2]+values[3])/2,values[4]]
   values2=[(values_p[0]+values_p[1])/2,(values_p[2]+values_p[3])/2,values_p[4]]
-
   text_description=[]
 
   for i in range(len(values1)):
-    if values1[i]>=values2[i]:
 
+    if values1[i]>=values2[i]:
       if values1[i]-values2[i]>=20:
         text_description.append("進步幅度：高")
-
       elif values1[i]-values2[i]>=10:
         text_description.append("進步幅度：中")
-
       else:
        text_description.append("進步幅度：低")
 
     else:
       if values2[i]-values1[i]>=20:
         text_description.append("退步幅度：高")
-
       elif values2[i]-values1[i]>=10:
         text_description.append("退步幅度：中")
-
       else:
        text_description.append("退步幅度：低")
 

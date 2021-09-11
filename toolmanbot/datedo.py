@@ -29,9 +29,7 @@ def datedo_list_generator(date):
                                        action=MessageAction(label="尋找話題", text='尋找話題:'+date), )
                     ])]
 
-    bubble=BubbleContainer(
-                    director='ltr',
-                    body=BoxComponent(layout="vertical",contents=button_list
-                    )
-                )
+    bubble=BubbleContainer(director='ltr',body=BoxComponent(layout="vertical",contents=button_list))
+
+
     return bubble

@@ -25,16 +25,7 @@ def carousel_list(topic,topic1,topic2,topic3):
             }
           ]
         },
-        "hero": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "解釋topic1顯示原因"
-            }
-          ]
-        },
+
         "body": {
           "type": "box",
           "layout": "vertical",
@@ -84,16 +75,7 @@ def carousel_list(topic,topic1,topic2,topic3):
             }
           ]
         },
-        "hero": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "解釋topic2顯示原因"
-            }
-          ]
-        },
+
         "body": {
           "type": "box",
           "layout": "vertical",
@@ -143,16 +125,7 @@ def carousel_list(topic,topic1,topic2,topic3):
             }
           ]
         },
-        "hero": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "解釋topic3顯示原因"
-            }
-          ]
-        },
+
         "body": {
           "type": "box",
           "layout": "vertical",

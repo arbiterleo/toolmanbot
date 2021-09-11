@@ -90,6 +90,8 @@ def callback(request):
 
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
+                user_id = event.source.user_id #使用者id
+
                 if event.message.text == '最愛清單':
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='最愛清單',contents=favorite_list_button)
@@ -116,6 +118,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 elif re.match("目前好感度:", event.message.text):
+
                     reply_arr=[]
                     t_content=text_report(values,values_p)
                     txt=TextSendMessage(text=t_content)
@@ -124,6 +127,12 @@ def callback(request):
                     img=ImageSendMessage(original_content_url=i_content,preview_image_url=i_content)
                     reply_arr.append(img)
                     line_bot_api.reply_message(event.reply_token, reply_arr)
+
+                elif re.match("請開始上傳對話",event.message.text):
+
+                    date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
+
+
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
