@@ -109,9 +109,6 @@ def callback(request):
                     favorite_list.append(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象:"+event.message.text[5:]))
 
-                elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
-                    pass
-
                 elif re.match("刪除對象:", event.message.text):
                     favorite_list.remove(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象:"+event.message.text[5:]))
@@ -140,6 +137,9 @@ def callback(request):
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_id))
+
+                #elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
+#                    pass
 
                 else:
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入有效指令"))
