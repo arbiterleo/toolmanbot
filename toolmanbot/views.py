@@ -134,9 +134,10 @@ def callback(request):
                 elif re.match("請開始上傳對話",event.message.text):
                     date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
 
-                elif event.message.type=='file':
-                    file_path = f'/tmp/{event.message.file_name}'
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=file_path))
+                elif event.message.type=='image':
+                    #file_path = f'/tmp/{event.message.file_name}'
+                    a=events.message.id
+                    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=file_path))
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="test"))
 
                 elif event.message.text == '使用者':
