@@ -138,16 +138,7 @@ def callback(request):
                     date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
 
                 elif event.message.type=='file':
-
-                    file_path = f'/tmp/{event.message.file_name}'
-                    line_bot_api.reply_message(event.source.user_id, TextSendMessage(text='OK1'))
-                    message_content = line_bot_api.get_message_content(event.message.id)
-
-                    with open(file_path, 'wb') as fd:
-                        for chunk in message_content.iter_content():
-                            line_bot_api.reply_message(event.source.user_id, TextSendMessage(text='OK2'))
-                            fd.write(chunk)
-
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入有效指令"))
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
@@ -162,7 +153,6 @@ def callback(request):
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
-
 
 
 
