@@ -95,20 +95,18 @@ def callback(request):
 
         for event in events:
 
-            if isinstance(event, MessageEvent):  # 如果有訊息事件
-
-                user_id = event.source.user_id #使用者id
-
-
-                #本次分數(新計算得出的)
-                get_point_a=80.5
+            user_id = event.source.user_id #使用者id
+            #本次分數(新計算得出的)
+            get_point_a=80.5
 
                 #上次分數(資料庫內)
-                get_point_b=selectRecordByChattingObjectId(user_id)
+            get_point_b=selectRecordByChattingObjectId(user_id)
 
                 #把分數型態轉變為字串
-                point=str(get_point_a)
-                difference=str(get_point_a-get_point_b)
+            point=str(get_point_a)
+            difference=str(get_point_a-get_point_b)
+
+            if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '分析名單':
                     favorite_list_button=favorite_list_generator(favorite_list)
