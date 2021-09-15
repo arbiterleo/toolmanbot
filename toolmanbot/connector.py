@@ -122,6 +122,31 @@ def selectChattingObjectByUserLineId(id):
     except Exception as ex:
         print(ex)
 
+def selectChattingObjectNameByUserLineId(id):
+    try:
+        # 建立Connection物件
+        conn = pymysql.connect(**db_settings)
+
+        # 建立Cursor物件
+        with conn.cursor() as cursor:
+            # 新增資料SQL語法
+            command = "SELECT objectName FROM chatting_object WHERE User_lineId = (%s)"
+
+            cursor.execute(command, (id))
+
+            result = cursor.fetchall()
+            print(result)
+            return result
+
+            # 儲存變更
+            conn.commit()
+
+        # 關閉connection
+        conn.close()
+
+    except Exception as ex:
+        print(ex)
+
 #只會給你日期最晚的紀錄
 def selectRecordByChattingObjectId(id):
     try:
@@ -177,31 +202,9 @@ def getScoreByUserLineIdAndChattingObjectName(id,name):
         if(date[i][1] == name):
             print(selectRecordByChattingObjectId(date[i][0]))
             return selectRecordByChattingObjectId(date[i][0])
+    
+    return "搜尋不到"
 
-def selectChattingObjectNameByUserLineId(id):
-    try:
-        # 建立Connection物件
-        conn = pymysql.connect(**db_settings)
-
-        # 建立Cursor物件
-        with conn.cursor() as cursor:
-            # 新增資料SQL語法
-            command = "SELECT objectName FROM chatting_object WHERE User_lineId = (%s)"
-
-            cursor.execute(command, (id))
-
-            result = cursor.fetchall()
-            print(result)
-            return result
-
-            # 儲存變更
-            conn.commit()
-
-        # 關閉connection
-        conn.close()
-
-    except Exception as ex:
-        print(ex)
 
 def DeleteRecordByChattingObjectId(id):
     try:
@@ -225,7 +228,7 @@ def DeleteRecordByChattingObjectId(id):
 
 #addRecord(10,dt.date(2021,9,1))
 #selectUserByUserId("1")
-selectChattingObjectByUserLineId("Uc294f08279daf51cd9b283228fbb9328")
-getScoreByUserLineIdAndChattingObjectName("Uc294f08279daf51cd9b283228fbb9328","小蘭")
+selectChattingObjectNameByUserLineId("Uc294f08279daf51cd9b283228fbb9328")
+getScoreByUserLineIdAndChattingObjectName("Uc294f08279daf51cd9b283228fbb9328","小美")
 #selectRecordByChattingObjectId("8")
 
