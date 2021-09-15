@@ -8,13 +8,7 @@ def carousel_list(topic,topic1,topic2,topic3):
     "contents": [
       {
         "type": "bubble",
-        "hero": {
-          "type": "image",
-          "url": './toolmanbot/unicorn.png',
-          "size": "full",
-          "aspectRatio": "20:12",
-          "aspectMode": "cover"
-            },
+
         "header": {
           "type": "box",
           "layout": "vertical",
