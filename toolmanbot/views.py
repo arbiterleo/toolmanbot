@@ -46,13 +46,13 @@ values_p= [35,80,60,50,70,30] #各指標前次分數
 values_a= [40,50,12,70,90,60] #各指標平均分數
 
 #本次分數
-#get_point_a=80.5
+get_point_a=80.5
 #上次分數
-#get_point_b=77.5
+get_point_b=77.5
 
 #把分數型態轉變為字串
-#point=str(get_point_a)
-#difference=str(get_point_a-get_point_b)
+point=str(get_point_a)
+difference=str(get_point_a-get_point_b)
 
 #話題主題前三名
 topic=["Travel","Sports","Fashion"]
@@ -78,9 +78,6 @@ def callback(request):
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
 
-
-        message=[]
-
         try:
             events = parser.parse(body, signature)  # 傳入的事件
             print(events)
@@ -97,14 +94,14 @@ def callback(request):
 
             user_id = event.source.user_id #使用者id
             #本次分數(新計算得出的)
-            get_point_a=80.5
+            #get_point_a=80.5
 
                 #上次分數(資料庫內)
-            get_point_b=selectRecordByChattingObjectId(user_id)
+            #get_point_b=selectRecordByChattingObjectId(user_id)
 
                 #把分數型態轉變為字串
-            point=str(get_point_a)
-            difference=str(get_point_a-get_point_b)
+            #point=str(get_point_a)
+            #difference=str(get_point_a-get_point_b)
 
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
@@ -115,12 +112,11 @@ def callback(request):
 
 ###############################################################
                 elif event.type == 'image':
-                    message.append(TextSendMessage(text='圖片訊息'))
-                    line_bot_api.reply_message(event.reply_token,message)
+
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='圖片訊息'))
 
                 elif event.type == 'sticker':
-                    message.append(TextSendMessage(text='貼圖訊息'))
-                    line_bot_api.reply_message(event.reply_token,message)
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='貼圖訊息'))
 ################################################################
 
                 elif event.message.text == '報表說明':
@@ -160,9 +156,9 @@ def callback(request):
                     user_id = event.source.user_id
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_id))
 
-                elif event.message.text == '測試':
-                    type=event.message.type
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=type))
+                elif event.message.text == '測試分數':
+                    point=selectRecordByChattingObjectId(user_id)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=point))
 
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
