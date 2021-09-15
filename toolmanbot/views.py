@@ -163,7 +163,7 @@ def callback(request):
 
 
                 elif re.match("測g",event.message.text):
-                    a=('小美''小蘭')
+                    a=('小美','小蘭')
                     b=list(a)
                     point=str(b)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=point))
