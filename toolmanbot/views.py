@@ -3,6 +3,10 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbid
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
+from __future__ import unicode_literals
+import os
+from flask import Flask, request, abort
+
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import (
@@ -121,7 +125,6 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
                 elif re.match("目前好感度:", event.message.text):
-
                     reply_arr=[]
                     t_content=text_report(values,values_p)
                     txt=TextSendMessage(text=t_content)
@@ -132,9 +135,16 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, reply_arr)
 
                 elif re.match("請開始上傳對話",event.message.text):
-
                     date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
 
+                elif event.message.type=='file':
+                    file_path = f'./toolmanbot/{event.message.file_name}'
+                    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='OK1'))
+                    message_content = line_bot_api.get_message_content(event.message.id)
+                    with open(file_path, 'wb') as fd:
+                        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='OK2'))
+                        for chunk in message_content.iter_content():
+                            fd.write(chunk)
 
 
                 elif event.message.text == '使用者':
@@ -150,6 +160,8 @@ def callback(request):
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
+
+
 
 
 
