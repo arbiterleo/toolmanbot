@@ -178,6 +178,30 @@ def getScoreByUserLineIdAndChattingObjectName(id,name):
             print(selectRecordByChattingObjectId(date[i][0]))
             return selectRecordByChattingObjectId(date[i][0])
 
+def selectChattingObjectNameByUserLineId(id):
+    try:
+        # 建立Connection物件
+        conn = pymysql.connect(**db_settings)
+
+        # 建立Cursor物件
+        with conn.cursor() as cursor:
+            # 新增資料SQL語法
+            command = "SELECT objectName FROM chatting_object WHERE User_lineId = (%s)"
+
+            cursor.execute(command, (id))
+
+            result = cursor.fetchall()
+            print(result)
+            return result
+
+            # 儲存變更
+            conn.commit()
+
+        # 關閉connection
+        conn.close()
+
+    except Exception as ex:
+        print(ex)
 
 def DeleteRecordByChattingObjectId(id):
     try:
