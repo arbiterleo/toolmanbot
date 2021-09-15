@@ -157,8 +157,8 @@ def callback(request):
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
                     tuple=selectChattingObjectNameByUserLineId(user_id)
-                    list1=type(list(tuple))
-                    list=str(list1)
+                    #list1=type(list(tuple))
+                    list=str(tuple)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=list))
 
                 elif re.match("測試分數：",event.message.text):
