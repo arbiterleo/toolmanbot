@@ -91,17 +91,6 @@ def callback(request):
 
         for event in events:
 
-            #user_id = event.source.user_id #使用者id
-            #本次分數(新計算得出的)
-            #get_point_a=80.5
-
-                #上次分數(資料庫內)
-            #get_point_b=selectRecordByChattingObjectId(user_id)
-
-                #把分數型態轉變為字串
-            #point=str(get_point_a)
-            #difference=str(get_point_a-get_point_b)
-
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '分析名單':
@@ -115,11 +104,11 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
 ###############################################################
-                elif event.type == 'image':
+                elif event.message.type == 'image':
 
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='圖片訊息'))
 
-                elif event.type == 'sticker':
+                elif event.message.type == 'sticker':
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='貼圖訊息'))
 ################################################################
 
@@ -155,16 +144,6 @@ def callback(request):
 
                 elif re.match("請開始上傳對話",event.message.text):
                     date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
-
-                elif event.message.text == '使用者':
-                    user_id = event.source.user_id
-                    tup=selectChattingObjectNameByUserLineId(user_id)
-                    list1=[]
-                    for i in range(len(tup)):
-                        list1.append(tup[i][0])
-                    list=str(list1)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=list))
-
 
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
