@@ -30,7 +30,7 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw,text_report
 from .TextTemplate import instrution_content
-
+from .connector import selectRecordByChattingObjectId #抓最新分數
 
 #登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -78,6 +78,7 @@ def callback(request):
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
 
+
         message=[]
 
         try:
@@ -98,17 +99,28 @@ def callback(request):
 
                 user_id = event.source.user_id #使用者id
 
+
+                #本次分數(新計算得出的)
+                #get_point_a=80.5
+
+                #上次分數(資料庫內)
+                #get_point_b=selectRecordByChattingObjectId(user_id)
+
+                #把分數型態轉變為字串
+                #point=str(get_point_a)
+                #difference=str(get_point_a-get_point_b)
+
                 if event.message.text == '分析名單':
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
 ###############################################################
-                elif event.message.type=='image':
+                elif event.message.type== 'image':
                     message.append(TextSendMessage(text='圖片訊息'))
                     line_bot_api.reply_message(event.reply_token,message)
 
-                elif event.message.type=='sticker':
+                elif event.message.type== 'sticker':
                     message.append(TextSendMessage(text='貼圖訊息'))
                     line_bot_api.reply_message(event.reply_token,message)
 ################################################################
