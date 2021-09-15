@@ -102,7 +102,7 @@ def callback(request):
                             #a+=1
 #                            line_bot_api.push_message(event.source.user_id, TextSendMessage(text='OK3'))
 
-                    message = TextSendMessage(text=file_path)
+                    message = TextSendMessage(text=event.message.file_size)
                     line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '分析名單':
