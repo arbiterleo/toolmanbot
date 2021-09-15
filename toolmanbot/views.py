@@ -95,14 +95,14 @@ def callback(request):
                 if event.message.type=='file':
                     file_path = f'/tmp/{event.message.file_name}'
                     message_content = line_bot_api.get_message_content(event.message.id)
-                    with open(file_path, 'wb') as fd:
-                        a=0
-                        for chunk in message_content.iter_content():
-                            fd.write(chunk)
-                            a+=1
+                    #with open(file_path, 'wb') as fd:
+                        #a=0
+                        #for chunk in message_content.iter_content():
+                            #fd.write(chunk)
+                            #a+=1
 #                            line_bot_api.push_message(event.source.user_id, TextSendMessage(text='OK3'))
 
-                    message = TextSendMessage(text=event.message.file_path)
+                    message = TextSendMessage(text=file_path)
                     line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '分析名單':
