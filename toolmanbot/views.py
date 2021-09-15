@@ -30,7 +30,7 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw,text_report
 from .TextTemplate import instrution_content
-from .connector import selectRecordByChattingObjectId #抓最新分數
+from .connector import selectChattingObjectByUserLineId #抓過去分數
 
 #登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -158,7 +158,7 @@ def callback(request):
 
                 elif event.message.text == '測試分數':
                     user_id = event.source.user_id
-                    po=selectRecordByChattingObjectId(user_id)
+                    po=selectChattingObjectByUserLineId(user_id)
                     p=str(po)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=p))
 

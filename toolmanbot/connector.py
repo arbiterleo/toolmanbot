@@ -12,7 +12,7 @@ db_settings = {
     "charset": "utf8"
 }
 
-def addUser(id, name):
+def addUser(id, name, lineId):
     try:
         # 建立Connection物件
         conn = pymysql.connect(**db_settings)
@@ -20,9 +20,9 @@ def addUser(id, name):
         # 建立Cursor物件
         with conn.cursor() as cursor:
             # 新增資料SQL語法
-            command = "INSERT INTO user(idUser, UserName)VALUES(%s, %s)"
+            command = "INSERT INTO user(idUser, UserName, lineId)VALUES(%s, %s, %s)"
 
-            cursor.execute(command, (id, name))
+            cursor.execute(command, (id, name, lineId))
 
             # 儲存變更
             conn.commit()
@@ -41,7 +41,7 @@ def addChattingObject(name, userId):
         # 建立Cursor物件
         with conn.cursor() as cursor:
             # 新增資料SQL語法
-            command = "INSERT INTO chatting_object(objectName, User_idUser)VALUES(%s, %s)"
+            command = "INSERT INTO chatting_object(objectName, User_lineId)VALUES(%s, %s)"
 
             cursor.execute(command, (name, userId))
 
@@ -97,7 +97,7 @@ def selectUserByUserId(id):
     except Exception as ex:
         print(ex)
 
-def selectChattingObjectByUserId(id):
+def selectChattingObjectByUserLineId(id):
     try:
         # 建立Connection物件
         conn = pymysql.connect(**db_settings)
@@ -105,7 +105,7 @@ def selectChattingObjectByUserId(id):
         # 建立Cursor物件
         with conn.cursor() as cursor:
             # 新增資料SQL語法
-            command = "SELECT * FROM chatting_object WHERE User_idUser = (%s)"
+            command = "SELECT * FROM chatting_object WHERE User_lineId = (%s)"
 
             cursor.execute(command, (id))
             print(cursor.fetchall())
@@ -190,6 +190,6 @@ def DeleteRecordByChattingObjectId(id):
 
 #addRecord(8,dt.date(2022,8,9))
 #selectUserByUserId("1")
-#selectChattingObjectByUserId("1")
+selectChattingObjectByUserLineId("Uc294f08279daf51cd9b283228fbb9328")
 selectRecordByChattingObjectId("8")
 
