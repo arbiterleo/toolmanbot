@@ -96,7 +96,7 @@ def callback(request):
                     file_path = f'/tmp/{event.message.file_name}'
                     message_content = line_bot_api.get_message_content(event.message.id)
 
-                    with open(file_path, 'w') as fd:
+                    with open(file_path, 'wb') as fd:
                         a=0
                         for chunk in message_content.iter_content():
                             fd.write(chunk)
