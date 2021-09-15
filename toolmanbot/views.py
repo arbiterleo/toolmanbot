@@ -159,7 +159,7 @@ def callback(request):
                     tuple=selectChattingObjectNameByUserLineId(user_id)
                     list1=type(list(tuple))
                     list=str(list1)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=list1))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=list))
 
                 elif re.match("測試分數：",event.message.text):
                     date=event.message.text[5:]
