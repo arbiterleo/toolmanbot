@@ -92,7 +92,7 @@ def callback(request):
 
         for event in events:
 
-            user_id = event.source.user_id #使用者id
+            #user_id = event.source.user_id #使用者id
             #本次分數(新計算得出的)
             #get_point_a=80.5
 
@@ -157,6 +157,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_id))
 
                 elif event.message.text == '測試分數':
+                    user_id = event.source.user_id
                     point=selectRecordByChattingObjectId(user_id)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=point))
 
