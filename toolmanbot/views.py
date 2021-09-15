@@ -39,7 +39,7 @@ imgur_client=settings.IMGUR_CLIENT_ID
 
 
 ######需要從後端得到的東西######
-favorite_list=[] #最愛清單(from db)
+#favorite_list=[] #最愛清單(from db)
 
 values = [60,51,24,80,60,50] #各指標本次分數(from model)
 values_a= [40,50,12,70,90,60] #各指標平均分數(from DB)
@@ -105,6 +105,8 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.text == '分析名單':
+                    user_id = event.source.user_id
+                    favorite_list=selectChattingObjectNameByUserLineId(user_id)
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
