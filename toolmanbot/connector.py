@@ -132,7 +132,7 @@ def selectRecordByChattingObjectId(id):
 
             cursor.execute(command, (id))
             result = cursor.fetchone()
-            print(result[2:8])
+            return(result[2:8])
 
             # 儲存變更
             conn.commit()
