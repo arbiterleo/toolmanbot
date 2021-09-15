@@ -158,13 +158,14 @@ def callback(request):
                     user_id = event.source.user_id
                     tuple=selectChattingObjectNameByUserLineId(user_id)
                     list1=type(list(tuple))
-                    list=str(tuple)
+                    list=str(list1)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=list))
 
 
                 elif re.match("測g",event.message.text):
-                    a=["a","b"]
-                    point=str(a)
+                    a=('小美''小蘭')
+                    b=list(a)
+                    point=str(b)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=point))
 
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
