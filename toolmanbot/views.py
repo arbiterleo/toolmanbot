@@ -102,6 +102,15 @@ def callback(request):
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
+###############################################################
+                elif event.message.type=='image':
+                    message.append(TextSendMessage(text='圖片訊息'))
+                    line_bot_api.reply_message(event.reply_token,message)
+
+                elif event.message.type=='sticker':
+                    message.append(TextSendMessage(text='貼圖訊息'))
+                    line_bot_api.reply_message(event.reply_token,message)
+################################################################
 
                 elif event.message.text == '報表說明':
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
@@ -135,14 +144,6 @@ def callback(request):
 
                 elif re.match("請開始上傳對話",event.message.text):
                     date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
-
-                elif event.message.type=='image':
-                    message.append(TextSendMessage(text='圖片訊息'))
-                    line_bot_api.reply_message(event.reply_token,message)
-
-                elif event.message.type=='sticker':
-                    message.append(TextSendMessage(text='貼圖訊息'))
-                    line_bot_api.reply_message(event.reply_token,message)
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
