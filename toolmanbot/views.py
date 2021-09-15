@@ -155,7 +155,7 @@ def callback(request):
                     user_id = event.source.user_id
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_id))
 
-                elif event.message.text == '測試分數：':
+                elif re.match('測試分數：',event.message.text):
                     date=event.message.text[5:]
                     user_id = event.source.user_id
                     po=getScoreByUserLineIdAndChattingObjectName(user_id,date)
