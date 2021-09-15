@@ -86,7 +86,7 @@ def selectUserByUserId(id):
             command = "SELECT * FROM user WHERE idUser = (%s)"
 
             cursor.execute(command, (id))
-            print(cursor.fetchall())
+            return cursor.fetchall()
 
             # 儲存變更
             conn.commit()
@@ -108,7 +108,10 @@ def selectChattingObjectByUserLineId(id):
             command = "SELECT * FROM chatting_object WHERE User_lineId = (%s)"
 
             cursor.execute(command, (id))
-            return cursor.fetchall()
+
+            result = cursor.fetchall()
+            print(result)
+            return result
 
             # 儲存變更
             conn.commit()
@@ -132,7 +135,7 @@ def selectRecordByChattingObjectId(id):
 
             cursor.execute(command, (id))
             result = cursor.fetchone()
-            return(result[2:8])
+            return result[2:8]
 
             # 儲存變更
             conn.commit()
@@ -168,6 +171,14 @@ def getRecordScore(id, ScoreName):
     except Exception as ex:
         print(ex)
 
+def getScoreByUserLineIdAndChattingObjectName(id,name):
+    date = selectChattingObjectByUserLineId(id)
+    for i in range(0,len(date)):
+        if(date[i][1] == name):
+            print(selectRecordByChattingObjectId(date[i][0]))
+            return selectRecordByChattingObjectId(date[i][0])
+
+
 def DeleteRecordByChattingObjectId(id):
     try:
         # 建立Connection物件
@@ -188,8 +199,9 @@ def DeleteRecordByChattingObjectId(id):
         print(ex)
 
 
-#addRecord(8,dt.date(2022,8,9))
+#addRecord(10,dt.date(2021,9,1))
 #selectUserByUserId("1")
 selectChattingObjectByUserLineId("Uc294f08279daf51cd9b283228fbb9328")
-selectRecordByChattingObjectId("8")
+getScoreByUserLineIdAndChattingObjectName("Uc294f08279daf51cd9b283228fbb9328","小蘭")
+#selectRecordByChattingObjectId("8")
 

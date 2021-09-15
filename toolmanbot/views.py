@@ -30,7 +30,7 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw,text_report
 from .TextTemplate import instrution_content
-from .connector import selectChattingObjectByUserLineId #抓過去分數
+from .connector import getScoreByUserLineIdAndChattingObjectName
 
 #登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -39,11 +39,10 @@ imgur_client=settings.IMGUR_CLIENT_ID
 
 
 ######需要從後端得到的東西######
-favorite_list=[] #最愛清單
+favorite_list=[] #最愛清單(from db)
 
-values = [60,51,24,80,60,50] #各指標本次分數
-values_p= [35,80,60,50,70,30] #各指標前次分數
-values_a= [40,50,12,70,90,60] #各指標平均分數
+values = [60,51,24,80,60,50] #各指標本次分數(from model)
+values_a= [40,50,12,70,90,60] #各指標平均分數(from DB)
 
 #本次分數
 get_point_a=80.5
@@ -141,7 +140,7 @@ def callback(request):
 
                 elif re.match("目前好感度:", event.message.text):
                     reply_arr=[]
-                    t_content=text_report(values,values_p)
+                    t_content=text_report(values,values_a)
                     txt=TextSendMessage(text=t_content)
                     reply_arr.append(txt)
                     i_content = draw(imgur_client,values,values_a,point,difference)
@@ -156,11 +155,11 @@ def callback(request):
                     user_id = event.source.user_id
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_id))
 
-                elif event.message.text == '測試分數':
+                elif event.message.text == '測試分數：':
+                    date=event.message.text[5:]
                     user_id = event.source.user_id
-                    po=selectChattingObjectByUserLineId(user_id)
-                    p=str(po)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=p))
+                    po=getScoreByUserLineIdAndChattingObjectName(user_id,date)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=po))
 
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
