@@ -78,6 +78,8 @@ def callback(request):
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
 
+        message=[]
+
         try:
             events = parser.parse(body, signature)  # 傳入的事件
             print(events)
@@ -135,10 +137,12 @@ def callback(request):
                     date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
 
                 elif event.message.type=='image':
-                    #file_path = f'/tmp/{event.message.file_name}'
-                    #a=events.message.id
-                    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=file_path))
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="image"))
+                    message.append(TextSendMessage(text='圖片訊息'))
+                    line_bot_api.reply_message(event.reply_token,message)
+
+                elif event.message.type=='sticker':
+                    message.append(TextSendMessage(text='貼圖訊息'))
+                    line_bot_api.reply_message(event.reply_token,message)
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
