@@ -46,13 +46,13 @@ values_p= [35,80,60,50,70,30] #各指標前次分數
 values_a= [40,50,12,70,90,60] #各指標平均分數
 
 #本次分數
-get_point_a=80.5
+#get_point_a=80.5
 #上次分數
-get_point_b=77.5
+#get_point_b=77.5
 
 #把分數型態轉變為字串
-point=str(get_point_a)
-difference=str(get_point_a-get_point_b)
+#point=str(get_point_a)
+#difference=str(get_point_a-get_point_b)
 
 #話題主題前三名
 topic=["Travel","Sports","Fashion"]
@@ -101,14 +101,14 @@ def callback(request):
 
 
                 #本次分數(新計算得出的)
-                #get_point_a=80.5
+                get_point_a=80.5
 
                 #上次分數(資料庫內)
-                #get_point_b=selectRecordByChattingObjectId(user_id)
+                get_point_b=selectRecordByChattingObjectId(user_id)
 
                 #把分數型態轉變為字串
-                #point=str(get_point_a)
-                #difference=str(get_point_a-get_point_b)
+                point=str(get_point_a)
+                difference=str(get_point_a-get_point_b)
 
                 if event.message.text == '分析名單':
                     favorite_list_button=favorite_list_generator(favorite_list)
@@ -170,7 +170,6 @@ def callback(request):
                    pass
 
                 elif event.message.type=='text':
-
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='文字訊息'))
 
                 else:
