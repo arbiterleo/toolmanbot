@@ -108,7 +108,7 @@ def selectChattingObjectByUserLineId(id):
             command = "SELECT * FROM chatting_object WHERE User_lineId = (%s)"
 
             cursor.execute(command, (id))
-            print(cursor.fetchall())
+            return cursor.fetchall()
 
             # 儲存變更
             conn.commit()
