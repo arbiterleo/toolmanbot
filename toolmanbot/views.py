@@ -107,10 +107,9 @@ def callback(request):
                 if event.message.text == '分析名單':
                     user_id = event.source.user_id
                     tup=selectChattingObjectNameByUserLineId(user_id)
-                    list1=[]
+                    favorite_list=[]
                     for i in range(len(tup)):
-                        list1.append(tup[i][0])
-                    favorite_list=str(list1)
+                        favorite_list.append(tup[i][0])
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
