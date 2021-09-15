@@ -102,6 +102,7 @@ def callback(request):
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
+
 ###############################################################
                 elif event.message.type=='image':
                     message.append(TextSendMessage(text='圖片訊息'))
@@ -148,6 +149,10 @@ def callback(request):
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_id))
+
+                elif event.message.text == '測試':
+                    type=event.message.type
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=type))
 
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
