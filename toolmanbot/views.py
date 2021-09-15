@@ -92,11 +92,16 @@ def callback(request):
 
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
-                if event.message.type=='sticker':
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='貼圖訊息'))
+                if event.message.type=='file':
+                    file_path = f'/tmp/{event.message.file_name}'
+                    message_content = line_bot_api.get_message_content(event.message.id)
+                    with open(file_path, 'wb') as fd:
+                        for chunk in message_content.iter_content():
+                            fd.write(chunk)
+                            line_bot_api.push_message(event.source.user_id, TextSendMessage(text='OK3'))
 
-                elif event.message.type=='image':
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='圖片訊息'))
+                    message = TextSendMessage(text=event.message.file_name)
+                    line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
