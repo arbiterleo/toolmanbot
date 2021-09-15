@@ -136,9 +136,9 @@ def callback(request):
 
                 elif event.message.type=='image':
                     #file_path = f'/tmp/{event.message.file_name}'
-                    a=events.message.id
+                    #a=events.message.id
                     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=file_path))
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="test"))
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="image"))
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
