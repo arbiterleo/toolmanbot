@@ -72,7 +72,6 @@ topic3=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
 
 @csrf_exempt
 def callback(request):
-
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
@@ -93,7 +92,10 @@ def callback(request):
 
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
-                if event.message.text == '分析名單':
+                if event.message.type=='sticker':
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='貼圖訊息'))
+
+                elif event.message.text == '分析名單':
                     user_id = event.source.user_id
                     tup=selectChattingObjectNameByUserLineId(user_id)
                     favorite_list=[]
@@ -102,15 +104,6 @@ def callback(request):
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
-
-###############################################################
-                elif event.message.type == 'image':
-
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='圖片訊息'))
-
-                elif event.message.type == 'sticker':
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='貼圖訊息'))
-################################################################
 
                 elif event.message.text == '報表說明':
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
@@ -150,6 +143,14 @@ def callback(request):
 
                 elif event.message.type=='text':
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='文字訊息'))
+
+###############################################################
+                elif event.message.type=='image':
+
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='圖片訊息'))
+
+
+################################################################
 
                 else:
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入有效指令"))
