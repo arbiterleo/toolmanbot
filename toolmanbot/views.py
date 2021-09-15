@@ -138,12 +138,14 @@ def callback(request):
                     date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
 
                 elif event.message.type=='file':
-                    file_path = f'./toolmanbot/{event.message.file_name}'
-                    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='OK1'))
+
+                    file_path = f'/tmp/{event.message.file_name}'
+                    line_bot_api.reply_message(event.source.user_id, TextSendMessage(text='OK1'))
                     message_content = line_bot_api.get_message_content(event.message.id)
+
                     with open(file_path, 'wb') as fd:
-                        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='OK2'))
                         for chunk in message_content.iter_content():
+                            line_bot_api.reply_message(event.source.user_id, TextSendMessage(text='OK2'))
                             fd.write(chunk)
 
 
