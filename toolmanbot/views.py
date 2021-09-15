@@ -164,8 +164,9 @@ def callback(request):
 
                 elif re.match("測g",event.message.text):
                     a=('小美','小蘭')
+                    c=['小美','小蘭']
                     b=list(a)
-                    point=str(b)
+                    point=str(c)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=point))
 
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
