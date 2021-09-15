@@ -106,8 +106,11 @@ def callback(request):
 
                 if event.message.text == '分析名單':
                     user_id = event.source.user_id
-                    tuple=selectChattingObjectNameByUserLineId(user_id)
-                    favorite_list=list(selectChattingObjectNameByUserLineId(user_id))
+                    tup=selectChattingObjectNameByUserLineId(user_id)
+                    list1=[]
+                    for i in range(len(tup)):
+                        list1.append(tup[i][0])
+                    favorite_list=str(list1)
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
@@ -156,18 +159,13 @@ def callback(request):
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
-                    tuple=selectChattingObjectNameByUserLineId(user_id)
-                    list1=type(list(tuple))
+                    tup=selectChattingObjectNameByUserLineId(user_id)
+                    list1=[]
+                    for i in range(len(tup)):
+                        list1.append(tup[i][0])
                     list=str(list1)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=list))
 
-
-                elif event.message.text == 'AI':
-                    #a=('小美','小蘭')
-                    c=['小美','小蘭']
-                    #b=list(a)
-                    point=str(c)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=point))
 
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
