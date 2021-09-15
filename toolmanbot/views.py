@@ -116,11 +116,11 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, flex_message1)
 
 ###############################################################
-                elif event.message.type == 'image':
+                elif event.type == 'image':
                     message.append(TextSendMessage(text='圖片訊息'))
                     line_bot_api.reply_message(event.reply_token,message)
 
-                elif event.message.type == 'sticker':
+                elif event.type == 'sticker':
                     message.append(TextSendMessage(text='貼圖訊息'))
                     line_bot_api.reply_message(event.reply_token,message)
 ################################################################
@@ -169,7 +169,7 @@ def callback(request):
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
 
-                if event.message.type=='text':
+                elif event.message.type=='text':
 
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='文字訊息'))
 
