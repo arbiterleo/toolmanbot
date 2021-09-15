@@ -95,6 +95,9 @@ def callback(request):
                 if event.message.type=='sticker':
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='貼圖訊息'))
 
+                elif event.message.type=='image':
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='圖片訊息'))
+
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
                     tup=selectChattingObjectNameByUserLineId(user_id)
@@ -145,9 +148,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='文字訊息'))
 
 ###############################################################
-                elif event.message.type=='image':
 
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='圖片訊息'))
 
 
 ################################################################
