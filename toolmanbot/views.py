@@ -158,8 +158,9 @@ def callback(request):
 
                 elif event.message.text == '測試分數':
                     user_id = event.source.user_id
-                    point=selectRecordByChattingObjectId(user_id)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=point))
+                    po=selectRecordByChattingObjectId(user_id)
+                    p=str(po)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=p))
 
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
