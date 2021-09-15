@@ -37,20 +37,24 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 imgur_client=settings.IMGUR_CLIENT_ID
 
 
-#需要從後端得到的東西
+######需要從後端得到的東西######
 favorite_list=[] #最愛清單
 
 values = [60,51,24,80,60,50] #各指標本次分數
 values_p= [35,80,60,50,70,30] #各指標前次分數
 values_a= [40,50,12,70,90,60] #各指標平均分數
 
-get_point_a=80.5  #本次分數
-get_point_b=77.5 #上次分數
+#本次分數
+get_point_a=80.5
+#上次分數
+get_point_b=77.5
 
+#把分數型態轉變為字串
 point=str(get_point_a)
 difference=str(get_point_a-get_point_b)
 
-topic=["Travel","Sports","Fashion"] #話題主題前三名
+#話題主題前三名
+topic=["Travel","Sports","Fashion"]
 
 #主題1新聞連結
 topic1=["https://www.youtube.com/channel/UC0C-w0YjGpqDXGB8IHb662A",
