@@ -162,10 +162,10 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=list))
 
 
-                elif re.match("測g",event.message.text):
-                    a=('小美','小蘭')
+                elif event.message.text == 'AI':
+                    #a=('小美','小蘭')
                     c=['小美','小蘭']
-                    b=list(a)
+                    #b=list(a)
                     point=str(c)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=point))
 
