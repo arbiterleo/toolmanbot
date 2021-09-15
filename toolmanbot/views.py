@@ -155,7 +155,7 @@ def callback(request):
 
                 elif event.message.text == '使用者':
                     user_id = event.source.user_id
-                    list1=selectChattingObjectNameByUserLineId(user_id)
+                    list1=type(selectChattingObjectNameByUserLineId(user_id))
                     list=str(list1)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=list))
 

@@ -202,7 +202,7 @@ def getScoreByUserLineIdAndChattingObjectName(id,name):
         if(date[i][1] == name):
             print(selectRecordByChattingObjectId(date[i][0]))
             return selectRecordByChattingObjectId(date[i][0])
-    
+
     return "搜尋不到"
 
 

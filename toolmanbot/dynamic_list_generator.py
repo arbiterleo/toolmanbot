@@ -37,7 +37,7 @@ def favorite_list_generator(favorite_list):
 
     bubble=BubbleContainer(
                     director='ltr',
-                    body=BoxComponent(layout="vertical",contents=button_list
-                    )
+                    body=BoxComponent(layout="vertical",contents=button_list)
+
                 )
     return bubble
