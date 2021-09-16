@@ -93,16 +93,16 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.type=='file':
-                    file_path = f'/tmp/{event.message.file_name}'
+                    file_path = f'/tmp/tmp.txt'
                     message_content = line_bot_api.get_message_content(event.message.id)
 
                     with open(file_path, 'wb') as fd:
                         for chunk in message_content.iter_content():
                             fd.write(chunk)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.file_name))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=file_path))
 
-                #elif event.message.text == '分析名單'
-                    #frequency()
+                elif event.message.text == '檔案分數':
+                    frequency('/tmp/tmp.txt')
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
                     tup=selectChattingObjectNameByUserLineId(user_id)
