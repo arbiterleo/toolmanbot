@@ -50,21 +50,21 @@ def frequency(file_addr):
                     average += live_chat_count
                     live_chat_count = 0
                     count += 1
-                
+
                 last_word = words
 
     #最後再把迴圈沒算到的最後一次對話區間加進來
     average += live_chat_count
     live_chat_count = 0
     count += 1
-    
+
     average = float(average/count)    #平均一次即時聊天的句數
     chatrate = float(count/day)     #平均一天即時聊天的次數
     final_score = (average + chatrate) * 1.79
     if final_score > 17.9:
         final_score = 17.9
-    print(average, chatrate, final_score)
-    
+#    print(average, chatrate, final_score)
+
     f.close()
     return final_score
 
@@ -111,7 +111,7 @@ def wordanalysis(file_addr):
             neutral += score.neutral
             negative += score.negative
             count = count + 1
-    
+
     positive /= count
     neutral /= count
     negative /= count
@@ -121,3 +121,5 @@ def wordanalysis(file_addr):
 
     f.close()
     return final_score
+
+

@@ -103,6 +103,7 @@ def callback(request):
 
                 elif event.message.text == '檔案分數':
                     frequency('/tmp/tmp.txt')
+
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
                     tup=selectChattingObjectNameByUserLineId(user_id)
