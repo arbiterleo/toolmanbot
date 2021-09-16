@@ -102,7 +102,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=file_path))
 
                 elif event.message.text == '檔案分數':
-                    frequency('./toolmanbot/[LINE] 與好感度救星的聊天.txt')
+                    frequency('./toolmanbot/line.txt')
 
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
