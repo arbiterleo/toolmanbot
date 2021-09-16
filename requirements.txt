@@ -11,4 +11,4 @@ pyimgur
 matplotlib
 opencv-python-headless
 pymysql
-azure
+azure==4.0.0
