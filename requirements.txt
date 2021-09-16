@@ -12,3 +12,5 @@ matplotlib
 opencv-python-headless
 pymysql
 azure==4.0.0
+azure-ai-textanalytics
+azure-core
