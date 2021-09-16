@@ -31,7 +31,7 @@ from .carousel import carousel_list
 from .report import draw,text_report
 from .TextTemplate import instrution_content
 from .connector import getScoreByUserLineIdAndChattingObjectName,selectChattingObjectNameByUserLineId
-
+from .partition import frequency
 #登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -97,15 +97,12 @@ def callback(request):
                     message_content = line_bot_api.get_message_content(event.message.id)
 
                     with open(file_path, 'wb') as fd:
-                        a=0
                         for chunk in message_content.iter_content():
                             fd.write(chunk)
-                            a+=1
-#                           line_bot_api.push_message(event.source.user_id, TextSendMessage(text='OK3'))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.file_name))
 
-                    message = TextSendMessage(text=a)
-                    line_bot_api.reply_message(event.reply_token, message)
-
+                #elif event.message.text == '分析名單'
+                    #frequency()
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
                     tup=selectChattingObjectNameByUserLineId(user_id)
@@ -154,12 +151,6 @@ def callback(request):
 
                 elif event.message.type=='text':
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='文字訊息'))
-
-###############################################################
-
-
-
-################################################################
 
                 else:
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入有效指令"))
