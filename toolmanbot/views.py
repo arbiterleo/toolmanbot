@@ -93,8 +93,8 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.type=='file':
-                    fname1=event.message.file_name[7:]
-                    fname2=fname1[-8:]
+                    fname1=event.message.file_name[8:]
+                    fname2=fname1[:-7]
                     file_path = f'/tmp/{fname2}'
                     message_content = line_bot_api.get_message_content(event.message.id)
 
