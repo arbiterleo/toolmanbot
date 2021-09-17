@@ -40,7 +40,7 @@ def frequency(file_addr):
                 last_year = now_year
                 last_month = now_month
                 last_day = now_day
-            elif words[2] == ':':
+            elif findTime.search(words[0:5]) != None: #words[2] == ':':
                 hour_gap =  int(words[0:2]) - int(last_word[0:2])
                 miunte_gap = int(words[3:5]) - int(last_word[3:5])
                 if (hour_gap == 0 and miunte_gap <= 10) or (hour_gap == 1 and abs(miunte_gap) >= 55):
@@ -67,7 +67,6 @@ def frequency(file_addr):
 
     f.close()
     return final_score
-
 
 # 文字分析
 def authenticate_client():
