@@ -104,7 +104,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=file_path))
 
                 elif re.match('檔案分數：', event.message.text):
-                    file_path = f'/tmp{event.source.user_id}:{event.message.text[5:]}'
+                    file_path = f'/tmp/{event.source.user_id}:{event.message.text[5:]}'
                     a=frequency(file_path)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
 
