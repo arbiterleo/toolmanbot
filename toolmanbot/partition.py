@@ -63,7 +63,7 @@ def frequency(file_addr):
     final_score = (average + chatrate) * 1.79
     if final_score > 17.9:
         final_score = 17.9
-#    print(average, chatrate, final_score)
+    print(average, chatrate, final_score)
 
     f.close()
     return final_score
@@ -121,5 +121,3 @@ def wordanalysis(file_addr):
 
     f.close()
     return final_score
-
-
