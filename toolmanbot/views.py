@@ -95,7 +95,7 @@ def callback(request):
                 if event.message.type=='file':
                     fname1=event.message.file_name[8:]
                     fname2=fname1[:-7]
-                    file_path = f'/tmp/{fname2}:'+event.source.user_id
+                    file_path = f'/tmp/{event.source.user_id}/{fname2}'
                     message_content = line_bot_api.get_message_content(event.message.id)
 
                     with open(file_path, 'wb') as fd:
@@ -104,7 +104,7 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=file_path))
 
                 elif re.match('檔案分數：', event.message.text):
-                    file_path = f'/tmp/{event.message.text[5:]}:'+event.source.user_id
+                    file_path = f'/tmp{event.source.user_id}/{event.message.text[5:]}'
                     a=frequency(file_path)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
 
