@@ -95,7 +95,7 @@ def callback(request):
                 if event.message.type=='file':
                     fname1=event.message.file_name[8:]
                     fname2=fname1[:-7]
-                    file_path = f'/tmp/{event.source.user_id}/{fname2}'
+                    file_path = f'/tmp/{event.source.user_id}:{fname2}'
                     message_content = line_bot_api.get_message_content(event.message.id)
 
                     with open(file_path, 'wb') as fd:
