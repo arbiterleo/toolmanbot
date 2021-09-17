@@ -93,7 +93,9 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
 
                 if event.message.type=='file':
-                    file_path = f'/tmp/tmp.txt'
+                    fname1=event.message.file_name[7:]
+                    fname2=fname1[-8:]
+                    file_path = f'/tmp/{fname2}'
                     message_content = line_bot_api.get_message_content(event.message.id)
 
                     with open(file_path, 'wb') as fd:
@@ -101,10 +103,13 @@ def callback(request):
                             fd.write(chunk)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=file_path))
 
-                elif event.message.text == '檔案分數':
-                    file_path = f'/tmp/tmp.txt'
+                elif re.match('檔案分數：', event.message.text):
+                    file_path = f'/tmp/{event.message.text[5:]}'
                     a=frequency(file_path)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
+
+                elif event.message.text == '報表說明':
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
 
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
@@ -115,9 +120,6 @@ def callback(request):
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
-
-                elif event.message.text == '報表說明':
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
 
                 elif re.match("搜尋對象:", event.message.text):
                     date=event.message.text[5:] # 對象名稱(date)
