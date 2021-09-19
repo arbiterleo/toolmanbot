@@ -41,8 +41,8 @@ imgur_client=settings.IMGUR_CLIENT_ID
 ######需要從後端得到的東西######
 #favorite_list=[] #最愛清單(from db)
 
-values = [60,51,24,80,60,50] #各指標本次分數(from model)
-values_a= [40,50,12,70,90,60] #各指標平均分數(from DB)
+values = [60,51,70,80,60,50] #各指標本次分數(from model)
+values_a= [40,50,80,70,90,60] #各指標平均分數(from DB)
 
 #本次分數
 get_point_a=80.5

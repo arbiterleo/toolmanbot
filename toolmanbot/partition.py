@@ -59,7 +59,7 @@ def frequency(file_addr):
     count += 1
 
     average = float(average/count)    #平均一次即時聊天的句數
-    chatrate = float(count/day)     #平均一天即時聊天的次數
+    chatrate = float(count/day)     #平均一天即時聊天的次數 ######################
     final_score = (average + chatrate) * 1.79
     if final_score > 17.9:
         final_score = 17.9
@@ -120,3 +120,7 @@ def wordanalysis(file_addr):
 
     f.close()
     return final_score
+
+
+#a=frequency('/Users/xwlee/Downloads/[LINE] 與好感度救星的聊天.txt')
+#print(a)
