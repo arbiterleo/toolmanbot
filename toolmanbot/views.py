@@ -41,7 +41,7 @@ imgur_client=settings.IMGUR_CLIENT_ID
 
 
 ######需要從後端得到的東西######
-#favorite_list=[] #最愛清單(from db)
+favorite_list=[] #最愛清單(from db)
 
 values = [60,51,70,80,60,50] #各指標本次分數(from model)
 values_a= [40,50,80,70,90,60] #各指標平均分數(from DB)
@@ -88,7 +88,7 @@ def callback(request):
             return HttpResponseBadRequest()
 
         global topic
-
+        global favorite_list
         for event in events:
 
             if isinstance(event, MessageEvent):
@@ -117,15 +117,15 @@ def callback(request):
 #####第一次使用需要註冊帳號######
                 elif event.message.text == '我要註冊':
                     user_id = event.source.user_id
-                    addUser(user_id)
+#                    addUser(user_id)
 
 #####查看分析名單######
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
-                    tup=selectChattingObjectNameByUserLineId(user_id)
+#                   tup=selectChattingObjectNameByUserLineId(user_id)
                     favorite_list=[]
-                    for i in range(len(tup)):
-                        favorite_list.append(tup[i][0])
+#                    for i in range(len(tup)):
+#                        favorite_list.append(tup[i][0])
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
@@ -139,7 +139,7 @@ def callback(request):
                 elif re.match("新增對象：", event.message.text):
                     name=event.message.text[5:]
                     user_id = event.source.user_id
-                    addChattingObject(name,user_id)
+#                    addChattingObject(name,user_id)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象:"+event.message.text[5:]))
 
 #####刪除對象#####還沒完成
