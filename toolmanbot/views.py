@@ -88,7 +88,7 @@ def callback(request):
             return HttpResponseBadRequest()
 
         global topic
-        global favorite_list
+#        global favorite_list
         for event in events:
 
             if isinstance(event, MessageEvent):
