@@ -167,7 +167,7 @@ def callback(request):
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
 
-                elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
+                elif re.match("請開始上傳對話", event.message.text):
                        pass
                 else:
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入有效指令"))
