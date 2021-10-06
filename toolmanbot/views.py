@@ -118,6 +118,7 @@ def callback(request):
                 elif event.message.text == '我要註冊':
                     user_id = event.source.user_id
 #                    addUser(user_id)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="註冊成功！"))
 
 #####查看分析名單######
                 elif event.message.text == '分析名單':
@@ -166,6 +167,8 @@ def callback(request):
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
 
+                elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
+                       pass
                 else:
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入有效指令"))
 
