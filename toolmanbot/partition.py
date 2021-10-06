@@ -129,6 +129,3 @@ def frequency(file_addr):
     f.close()
     return final_score
 
-a=frequency('/Users/xwlee/Downloads/[LINE] 與王浚亦的聊天.txt')
-print(a)
-
