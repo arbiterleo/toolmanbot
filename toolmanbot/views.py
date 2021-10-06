@@ -123,7 +123,7 @@ def callback(request):
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
 #                   tup=selectChattingObjectNameByUserLineId(user_id)
-                    favorite_list=[]
+#                   favorite_list=[]
 #                    for i in range(len(tup)):
 #                        favorite_list.append(tup[i][0])
                     favorite_list_button=favorite_list_generator(favorite_list)
@@ -140,6 +140,7 @@ def callback(request):
                     name=event.message.text[5:]
                     user_id = event.source.user_id
 #                    addChattingObject(name,user_id)
+                    favorite_list.append(name)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象:"+event.message.text[5:]))
 
 #####刪除對象#####還沒完成
