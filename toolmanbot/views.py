@@ -30,7 +30,7 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw,text_report
 from .TextTemplate import instrution_content
-from .connector import selectChattingObjectNameByUserLineId,addUser,addChattingObject,addRecord
+#from .connector import selectChattingObjectNameByUserLineId,addUser,addChattingObject,addRecord
 from .partition import frequency
 
 
