@@ -13,6 +13,5 @@ pymysql
 azure==4.0.0
 azure-ai-textanalytics
 azure-core
-beautifulsoup4==4.10.0
 jieba==0.42.1
 ehownet==3.0.1
