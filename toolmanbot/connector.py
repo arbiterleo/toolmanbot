@@ -1,18 +1,12 @@
 import pymysql
 import time
 import datetime as dt
-
+from django.conf import settings
 # 資料庫設定
-db_settings = {
-    "host": "35.194.247.117",
-    "port": 3306,
-    "user": "admin01",
-    "password": "testbot123",
-    "db": "e_line",
-    "charset": "utf8"
-}
+db_settings = settings.db_settings
 
-def addUser(id, name, lineId):
+
+def addUser(lineId):
     try:
         # 建立Connection物件
         conn = pymysql.connect(**db_settings)
@@ -20,9 +14,9 @@ def addUser(id, name, lineId):
         # 建立Cursor物件
         with conn.cursor() as cursor:
             # 新增資料SQL語法
-            command = "INSERT INTO user(idUser, UserName, lineId)VALUES(%s, %s, %s)"
+            command = "INSERT INTO user(lineId)VALUES(%s)"
 
-            cursor.execute(command, (id, name, lineId))
+            cursor.execute(command, (lineId))
 
             # 儲存變更
             conn.commit()

@@ -30,8 +30,10 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw,text_report
 from .TextTemplate import instrution_content
-from .connector import getScoreByUserLineIdAndChattingObjectName,selectChattingObjectNameByUserLineId
+from .connector import selectChattingObjectNameByUserLineId,addUser,addChattingObject,addRecord
 from .partition import frequency
+
+
 #登入linebot 跟 imgur 需要的東西(from settings)
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -85,22 +87,23 @@ def callback(request):
         except LineBotApiError:
             return HttpResponseBadRequest()
 
-        global favorite_list #全域變數
         global topic
 
         for event in events:
 
-            if isinstance(event, MessageEvent):  # 如果有訊息事件
+            if isinstance(event, MessageEvent):
 
-                if event.message.type=='file':
+                if event.message.type=='file': #############分析完後要回傳到資料庫##################
                     fname1=event.message.file_name[8:]
                     fname2=fname1[:-7]
-                    file_path = f'/tmp/{event.source.user_id}:{fname2}'
+                    user_id=event.source.user_id
+                    file_path = f'/tmp/{user_id}:{fname2}'
                     message_content = line_bot_api.get_message_content(event.message.id)
-
                     with open(file_path, 'wb') as fd:
                         for chunk in message_content.iter_content():
                             fd.write(chunk)
+
+                    #addRecord(user_id,fname2)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=file_path))
 
                 elif re.match('檔案分數：', event.message.text):
@@ -111,6 +114,12 @@ def callback(request):
                 elif event.message.text == '報表說明':
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
 
+#####第一次使用需要註冊帳號######
+                elif event.message.text == '我要註冊':
+                    user_id = event.source.user_id
+                    addUser(user_id)
+
+#####查看分析名單######
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
                     tup=selectChattingObjectNameByUserLineId(user_id)
@@ -126,10 +135,14 @@ def callback(request):
                     flex_message2=FlexSendMessage(alt_text=date,contents=datedo_list_generator(date))
                     line_bot_api.reply_message(event.reply_token, flex_message2)
 
+#####新增對象######
                 elif re.match("新增對象：", event.message.text):
-                    favorite_list.append(event.message.text[5:])
+                    name=event.message.text[5:]
+                    user_id = event.source.user_id
+                    addChattingObject(name,user_id)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象:"+event.message.text[5:]))
 
+#####刪除對象#####還沒完成
                 elif re.match("刪除對象:", event.message.text):
                     favorite_list.remove(event.message.text[5:])
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功刪除對象:"+event.message.text[5:]))
@@ -138,6 +151,7 @@ def callback(request):
                     flex_message3=carousel_list(topic,topic1,topic2,topic3)
                     line_bot_api.reply_message(event.reply_token, flex_message3)
 
+######從資料庫抓1.最新分數＆次新分數陣列 2.最新指標＆次新指標陣列 3.平均指標######還沒完成
                 elif re.match("目前好感度:", event.message.text):
                     reply_arr=[]
                     t_content=text_report(values,values_a)
@@ -148,14 +162,8 @@ def callback(request):
                     reply_arr.append(img)
                     line_bot_api.reply_message(event.reply_token, reply_arr)
 
-                elif re.match("請開始上傳對話",event.message.text):
-                    date=event.message.text[7:] # 提供給後端需要儲存對話紀錄給哪個對象
-
                 elif re.match("開始新增對象，請輸入「新增對象：對象名稱」", event.message.text):
                    pass
-
-                elif event.message.type=='text':
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='文字訊息'))
 
                 else:
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入有效指令"))

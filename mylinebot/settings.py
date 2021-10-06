@@ -135,3 +135,14 @@ IMGUR_CLIENT_ID = 'e00f48cb1956755'
 
 #static folder
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+#DB
+db_settings = {
+    "host": "database-1.c5ujpdahvdo6.us-east-2.rds.amazonaws.com",
+    "port": 3306,
+    "user": "admin",
+    "password": "Goblin87!",
+    "db": "e_line",
+    "charset": "utf8"
+}

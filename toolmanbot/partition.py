@@ -1,10 +1,67 @@
+# -*- coding: utf-8 -*-
+#import ch
+import jieba
+import jieba.analyse
+import jieba.posseg as pseg
 import re
-from azure.ai.textanalytics import TextAnalyticsClient
-from azure.core.credentials import AzureKeyCredential
+
+# 範例
+
+# text1 = '我最近和我朋友都在看籃球'
+
+# print('\n- 斷字:\n\n', '|'.join(jieba.cut(text1, cut_all=False, HMM=True))+'\n')
+
+# words = pseg.cut(text1)
+# for word, flag in words:
+#     print(word, flag)
 
 findDate = re.compile(r'(\d\d\d\d)/([0-9]+)/([0-9]+)') #用來取出日期時間的regex
 findTime = re.compile(r'(\d\d):(\d\d)')
 
+def partition(text):
+
+    # jump = 0
+    keyword = []
+
+    # 冗詞
+
+    ignore = ['照片', '貼圖', '晚安', '早安', '感覺', '時候', '結果', '嘴巴', '檔案',
+              '電話', '話', '樓', '意思', '原本', '大家', '時間', '眼', '人', '小夜', '電', '通話']
+
+    # 把通話及照片的相關字句刪掉
+
+    for Line in text:
+        if '☎' in Line:
+            # jump = 1
+            return None
+
+    # 自定義部分詞彙
+
+    jieba.load_userdict('./data/userDict.txt')
+
+    # 斷字結果
+
+    # if jump == 0:
+    #     result = jieba.cut(text, cut_all=False, HMM=True)
+    #     print('|'.join(result))
+
+    # 關鍵字抽取
+
+    tags = jieba.analyse.extract_tags(text, topK=8)
+
+    # 找出合適關鍵字
+
+    str = ''
+    temp = str.join(tags)
+
+    words = pseg.cut(temp)
+    for word, flag in words:
+        ignore_set = set(ignore)
+        if not word in ignore_set:
+            if flag == ('n' or 'nr' or 'ns' or 'nt' or 'nz'):
+                keyword.append(word)
+
+    return keyword
 
 #算頻率(目前只有一句對話的區間不會等於沒有聊天，但count會被+1)
 #input: 檔案位址， return:對話頻率分數(最高17.9)
@@ -17,7 +74,10 @@ def frequency(file_addr):
     f = open(file_addr, "r", encoding="utf-8")
     all_lines = f.readlines()
     name1 = all_lines[0][:-6]
-    name1 = name1[9:]
+    i = 0
+    while name1[i] != "與":
+        i += 1
+    name1 = name1[i+1:]
     chat_record = all_lines[3:]
     len1 = 6 + len(name1) + 1
     print(chat_record[2][6:len1])
@@ -57,70 +117,18 @@ def frequency(file_addr):
     average += live_chat_count
     live_chat_count = 0
     count += 1
+    print(average, count, day)
 
     average = float(average/count)    #平均一次即時聊天的句數
-    chatrate = float(count/day)     #平均一天即時聊天的次數 ######################
+    chatrate = float(count/day)     #平均一天即時聊天的次數
     final_score = (average + chatrate) * 1.79
     if final_score > 17.9:
         final_score = 17.9
-    print(average, chatrate, final_score)
+    print("聊天頻率:", average, chatrate, final_score)
 
     f.close()
     return final_score
 
-# 文字分析
-def authenticate_client():
-    ta_credential = AzureKeyCredential('088f06feefd842fcabc7a17bc0005c0f')
-    text_analytics_client = TextAnalyticsClient(
-        endpoint='https://12341234.cognitiveservices.azure.com/',
-        credential=ta_credential)
-    return text_analytics_client
+a=frequency('/Users/xwlee/Downloads/[LINE] 與王浚亦的聊天.txt')
+print(a)
 
-
-client = authenticate_client()
-
-def sentiment_analysis_example(client, documents):
-    response = client.analyze_sentiment(documents=documents)[0]
-    return response.confidence_scores
-
-#文字分析主功能
-#input:檔案位址，return:好感度分數(最高19.2)
-def wordanalysis(file_addr):
-    f = open(file_addr, "r", encoding="utf-8")
-    all_lines = f.readlines()
-    name = all_lines[0][:-6]
-    name = name[9:]
-    chat_record = all_lines[3:]
-    len1 = 6 + len(name) + 1
-    documents = []
-    positive = 0
-    neutral = 0
-    negative = 0
-    count = 0
-    for words in chat_record:
-        if words[6:len1] == name:
-            documents = [{
-                "language": "zh-hant",
-                "id": "1",
-                "text": words[9:]
-            }]
-            score = sentiment_analysis_example(client, documents)
-
-            positive += score.positive
-            neutral += score.neutral
-            negative += score.negative
-            count = count + 1
-
-    positive /= count
-    neutral /= count
-    negative /= count
-    print(positive, neutral, negative)
-    final_score = (positive - negative + 1) * 19.2 / 2
-    print(final_score)
-
-    f.close()
-    return final_score
-
-
-#a=frequency('/Users/xwlee/Downloads/[LINE] 與好感度救星的聊天.txt')
-#print(a)
