@@ -4,6 +4,8 @@ import jieba
 import jieba.analyse
 import jieba.posseg as pseg
 import re
+from azure.ai.textanalytics import TextAnalyticsClient
+from azure.core.credentials import AzureKeyCredential
 
 # 範例
 
@@ -129,3 +131,58 @@ def frequency(file_addr):
     f.close()
     return final_score
 
+# 文字分析 + 回傳最後時間
+def authenticate_client():
+    ta_credential = AzureKeyCredential('088f06feefd842fcabc7a17bc0005c0f')
+    text_analytics_client = TextAnalyticsClient(
+        endpoint='https://12341234.cognitiveservices.azure.com/',
+        credential=ta_credential)
+    return text_analytics_client
+
+
+client = authenticate_client()
+
+def sentiment_analysis_example(client, documents):
+    response = client.analyze_sentiment(documents=documents)[0]
+    return response.confidence_scores
+
+#文字分析主功能
+#input:檔案位址，return:好感度分數(最高19.2)
+def wordanalysis(file_addr):
+    f = open(file_addr, "r", encoding="utf-8")
+    all_lines = f.readlines()
+    name = all_lines[0][:-6]
+    i = 0
+    while name[i] != "與":
+        i += 1
+    name = name[i+1:]
+    chat_record = all_lines[3:]
+    len1 = 6 + len(name)
+    documents = []
+    positive = 0
+    neutral = 0
+    negative = 0
+    count = 0
+    for words in chat_record:
+        if words[6:len1] == name:
+            documents = [{
+                "language": "zh-hant",
+                "id": "1",
+                "text": words[9:]
+            }]
+            score = sentiment_analysis_example(client, documents)
+
+            positive += score.positive
+            neutral += score.neutral
+            negative += score.negative
+            count = count + 1
+
+    positive /= count
+    neutral /= count
+    negative /= count
+    print(positive, neutral, negative)
+    final_score = (positive - negative + 1) * 19.2 / 2
+    print(final_score)
+
+    f.close()
+    return final_score
