@@ -112,6 +112,11 @@ def callback(request):
                     a=frequency(file_path)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
 
+                elif re.match('情感：', event.message.text):
+                    file_path = f'/tmp/{event.source.user_id}:{event.message.text[5:]}'
+                    a=wordanalysis(file_path)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
+
                 elif event.message.text == '報表說明':
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
 
