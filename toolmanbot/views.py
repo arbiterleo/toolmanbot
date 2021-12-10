@@ -30,7 +30,7 @@ from .datedo import datedo_list_generator  #對象工具列
 from .carousel import carousel_list
 from .report import draw,text_report
 from .TextTemplate import instrution_content
-#from .connector import selectChattingObjectNameByUserLineId,addUser,addChattingObject,addRecord
+from .connector import selectChattingObjectNameByUserLineId,addUser,addChattingObject,addRecord
 from .partition import frequency
 
 
@@ -103,7 +103,7 @@ def callback(request):
                         for chunk in message_content.iter_content():
                             fd.write(chunk)
 
-                    #addRecord(user_id,fname2)
+                    addRecord(user_id,fname2)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+fname2))
 
                 elif re.match('檔案分數：', event.message.text):
@@ -117,16 +117,16 @@ def callback(request):
 #####第一次使用需要註冊帳號######
                 elif event.message.text == '我要註冊':
                     user_id = event.source.user_id
-#                    addUser(user_id)
+                    addUser(user_id)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="註冊成功！"))
 
 #####查看分析名單######
                 elif event.message.text == '分析名單':
                     user_id = event.source.user_id
-#                   tup=selectChattingObjectNameByUserLineId(user_id)
-#                   favorite_list=[]
-#                    for i in range(len(tup)):
-#                        favorite_list.append(tup[i][0])
+                    tup=selectChattingObjectNameByUserLineId(user_id)
+                    favorite_list=[]
+                    for i in range(len(tup)):
+                        favorite_list.append(tup[i][0])
                     favorite_list_button=favorite_list_generator(favorite_list)
                     flex_message1=FlexSendMessage(alt_text='分析名單',contents=favorite_list_button)
                     line_bot_api.reply_message(event.reply_token, flex_message1)
