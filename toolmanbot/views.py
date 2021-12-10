@@ -33,8 +33,8 @@ from .TextTemplate import instrution_content
 from .connector import selectChattingObjectNameByUserLineId,addUser,addChattingObject,addRecord
 from .partition import frequency,wordanalysis
 from .test import getAmountScore,getSpeedScore
-from .tScore import callt
-from .rScore import callr
+#from .tScore import callt
+#from .rScore import callr
 
 
 #登入linebot 跟 imgur 需要的東西(from settings)
@@ -128,16 +128,6 @@ def callback(request):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
                     d=getAmountScore(file_path)*0.1715
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=d))
-
-                elif re.match('電話：', event.message.text):
-                    file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
-                    e=callt(file_path)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=e))
-
-                elif re.match('通話：', event.message.text):
-                    file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
-                    f=callr(file_path)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=f))
 
                 elif event.message.text == '報表說明':
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
