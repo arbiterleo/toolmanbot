@@ -108,7 +108,6 @@ def callback(request):
 
                     addRecord(user_id,fname2)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+fname2))
-                    #line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+file_path))
 
                 elif re.match('速度：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
@@ -197,7 +196,7 @@ def callback(request):
                    pass
 
                 elif re.match("請開始上傳對話", event.message.text):
-                       pass
+                    pass
                 else:
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入有效指令"))
 
