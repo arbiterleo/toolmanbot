@@ -33,8 +33,6 @@ from .TextTemplate import instrution_content
 from .connector import selectChattingObjectNameByUserLineId,addUser,addChattingObject,addRecord
 from .partition import frequency,wordanalysis
 from .test import getAmountScore,getSpeedScore
-#from .tScore import callt
-#from .rScore import callr
 
 
 #登入linebot 跟 imgur 需要的東西(from settings)

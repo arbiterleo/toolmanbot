@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import ch
+#import ch
 import jieba
 import jieba.analyse
 import jieba.posseg as pseg
