@@ -104,7 +104,8 @@ def callback(request):
                             fd.write(chunk)
 
                     addRecord(user_id,fname2)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+fname2))
+                    #line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+fname2))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+file_path))
 
                 elif re.match('檔案分數：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[5:]}'
@@ -141,7 +142,7 @@ def callback(request):
                 elif re.match("新增對象：", event.message.text):
                     name=event.message.text[5:]
                     user_id = event.source.user_id
-#                    addChattingObject(name,user_id)
+                    addChattingObject(name,user_id)
                     favorite_list.append(name)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功新增對象:"+event.message.text[5:]))
 
