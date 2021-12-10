@@ -3,13 +3,13 @@ import datetime as dt
 #import connector as ct
 
 #------------------------------變數設定---------------------------------
-chatfile = open('[LINE] 與好感度救星的聊天.txt', mode='r', encoding="utf-8")
+#chatfile = open('[LINE] 與好感度救星的聊天.txt', mode='r', encoding="utf-8")
 #chatfile = open('test_file.txt', mode='r', encoding="utf-8")
 
 #chat = chatfile.readlines()
 
-user = "緯"
-target = "好感度救星"
+#user = "緯"
+#target = "好感度救星"
 
 isUser = None
 
