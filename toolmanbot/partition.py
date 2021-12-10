@@ -180,9 +180,14 @@ def wordanalysis(file_addr):
     positive /= count
     neutral /= count
     negative /= count
-    print(positive, neutral, negative)
+#    print(positive, neutral, negative)
     final_score = (positive - negative + 1) * 19.2 / 2
-    print(final_score)
+#    print(final_score)
 
     f.close()
     return final_score
+
+
+
+
+#wordanalysis("/Users/xwlee/Downloads/[LINE] 與王浚亦的聊天.txt")
