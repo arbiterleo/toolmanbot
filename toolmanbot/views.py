@@ -109,8 +109,8 @@ def callback(request):
                     #line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+file_path))
 
                 elif re.match('速度：', event.message.text):
-                    file_path = f'/tmp/{event.source.user_id}:{event.message.text[5:]}'
-                    a=getSpeedScore(file_path)
+                    file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
+                    a=getSpeedScore(file_path)*0.1695
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
 
                 elif re.match('頻率：', event.message.text):
@@ -125,7 +125,7 @@ def callback(request):
 
                 elif re.match('內容：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
-                    d=getAmountScore(file_path)
+                    d=getAmountScore(file_path)*0.1715
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=d))
 
                 elif event.message.text == '報表說明':
