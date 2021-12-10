@@ -75,8 +75,9 @@ def addChattingObject(name, userId):
     except Exception as ex:
         print(ex)
 
-def addRecord(id,date):
+def addRecord(lineId,objectname):
     try:
+        id = selectChattingObjectIdByUserLineIdandName(lineId,objectname)
         # 建立Connection物件
         conn = pymysql.connect(**db_settings)
 
@@ -84,6 +85,7 @@ def addRecord(id,date):
         with conn.cursor() as cursor:
             # 新增資料SQL語法
             command = "INSERT INTO record(recordDate, chatting_object_idchatting_object)VALUES(%s, %s)"
+            date = dt.date.today()
             datetime = "{}-{}-{}".format(date.year,date.month,date.day)
             cursor.execute(command, (datetime, id))
 
@@ -142,6 +144,31 @@ def selectChattingObjectByUserLineId(id):
 
     except Exception as ex:
         print(ex)
+
+def selectChattingObjectIdByUserLineIdandName(id,name):
+    try:
+        # 建立Connection物件
+        conn = pymysql.connect(**db_settings)
+
+        # 建立Cursor物件
+        with conn.cursor() as cursor:
+            # 新增資料SQL語法
+            command = "SELECT idchatting_object FROM chatting_object WHERE User_lineId = (%s) AND objectName = (%s)"
+
+            cursor.execute(command, (id,name))
+
+            result = cursor.fetchall()
+            return result[0][0]
+
+            # 儲存變更
+            conn.commit()
+
+        # 關閉connection
+        conn.close()
+
+    except Exception as ex:
+        print(ex)
+
 
 def selectChattingObjectNameByUserLineId(id):
     try:
@@ -247,9 +274,9 @@ def DeleteRecordByChattingObjectId(id):
     except Exception as ex:
         print(ex)
 
+addRecord("Uc294f08279daf51cd9b283228fbb9328","4C")
 #addUser("testlineId")
 #addChattingObject("Amy","testlineId")
-
 #addRecord(10,dt.date(2021,9,1))
 #selectUserByUserId("1")
 #selectChattingObjectNameByUserLineId("Uc294f08279daf51cd9b283228fbb9328")
