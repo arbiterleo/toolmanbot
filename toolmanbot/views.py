@@ -32,6 +32,7 @@ from .report import draw,text_report
 from .TextTemplate import instrution_content
 from .connector import selectChattingObjectNameByUserLineId,addUser,addChattingObject,addRecord
 from .partition import frequency,wordanalysis
+from .test import getAmountScore,getSpeedScore
 
 
 #登入linebot 跟 imgur 需要的東西(from settings)
@@ -107,9 +108,9 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+fname2))
                     #line_bot_api.reply_message(event.reply_token, TextSendMessage(text="成功傳送對話："+file_path))
 
-                elif re.match('檔案分數：', event.message.text):
+                elif re.match('速度：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[5:]}'
-                    a=frequency(file_path)
+                    a=getSpeedScore(file_path)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
 
                 elif re.match('頻率：', event.message.text):
@@ -120,6 +121,11 @@ def callback(request):
                 elif re.match('情感：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
                     b=wordanalysis(file_path)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=b))
+
+                elif re.match('內容：', event.message.text):
+                    file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
+                    b=getAmountScore(file_path)
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=b))
 
                 elif event.message.text == '報表說明':
