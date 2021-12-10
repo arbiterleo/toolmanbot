@@ -1,6 +1,6 @@
 import re
 import datetime as dt
-import connector as ct
+#import connector as ct
 
 #------------------------------變數設定---------------------------------
 chatfile = open('[LINE] 與好感度救星的聊天.txt', mode='r', encoding="utf-8")
@@ -38,22 +38,22 @@ def findUserName(chat):
                 while chat[i][j].isspace() == False:
                     name += chat[i][j]
                     j+=1
-                return name           
+                return name
 
-    return "error"        
+    return "error"
 
 def checkIfChat(line,user,target):
     line = line[6:]
-    
+
     mo = re.match(user, line)
     if mo != None:
-        return 1 #this line is said by user 
+        return 1 #this line is said by user
     else:
         mo = re.match(target, line)
-        if mo != None:    
+        if mo != None:
             return 2 #this line is said by target
         else:
-            return 0 #this line isn't conversation     
+            return 0 #this line isn't conversation
 
 def checkIfReplied(line,user,target):
     global isUser
@@ -71,9 +71,9 @@ def checkIfReplied(line,user,target):
             return 1 #this line is the first response by target, needs to ba added into the amount, also needs to calculate the response time
         else:
             return 3 #this line is said by target, needs to ba added into the amount
-        
+
     else:
-        return 0 #this line isn't conversation, no need to take action    
+        return 0 #this line isn't conversation, no need to take action
 
 def calculate_speed(chat):
     user = findUserName(chat)
@@ -82,7 +82,7 @@ def calculate_speed(chat):
     date = []
     totalResponseTime = dt.timedelta()
     count = 0
-    
+
     for i in range(3, len(chat)-1): #and chat[i].strip() != ""
         if checkIfChat(chat[i],user,target) == 0 and findDate.search(chat[i]) != None: #將檔案中的空白行去掉
             date.append(chat[i])
@@ -103,12 +103,12 @@ def calculate_speed(chat):
                 targettime = findTime.search(chat[i])
                 userdatetime = dt.datetime(int(userdate.group(1)), int(userdate.group(2)), int(userdate.group(3)),int(usertime.group(1)), int(usertime.group(2)))
                 targetdatetime = dt.datetime(int(targetdate.group(1)), int(targetdate.group(2)), int(targetdate.group(3)),int(targettime.group(1)), int(targettime.group(2)))
-                #print("responsetime:", targetdatetime-userdatetime, i)   
+                #print("responsetime:", targetdatetime-userdatetime, i)
 
             totalResponseTime += (targetdatetime-userdatetime)
             count += 1
         #else:
-            #print("對話行:", i)  
+            #print("對話行:", i)
     print("平均每次回覆時間:", totalResponseTime/count)
 
     lastdate = dt.date(int(userdate.group(1)), int(userdate.group(2)), int(userdate.group(3)))
@@ -143,7 +143,7 @@ def getWheretoStart(lastdate,path):
         if(result != None):
             currentdate = dt.date(int(result.group(1)),int(result.group(2)),int(result.group(3)))
             if(currentdate == lastdate):
-                return i   
+                return i
     return -1
 
 def getAmountScore(path):
@@ -186,5 +186,5 @@ def getSpeedScore(path):
 
 #print("斷點:",getWheretoStart(dt.date(2021,9,15),'[LINE] 與好感度救星的聊天.txt'))
 
-    
+
 #chatfile.close()

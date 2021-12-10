@@ -115,18 +115,18 @@ def callback(request):
 
                 elif re.match('頻率：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
-                    a=frequency(file_path)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
+                    b=frequency(file_path)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=b))
 
                 elif re.match('情感：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
-                    b=wordanalysis(file_path)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=b))
+                    c=wordanalysis(file_path)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=c))
 
                 elif re.match('內容：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
-                    b=getAmountScore(file_path)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=b))
+                    d=getAmountScore(file_path)
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=d))
 
                 elif event.message.text == '報表說明':
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
