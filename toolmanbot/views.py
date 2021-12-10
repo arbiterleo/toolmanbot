@@ -120,7 +120,7 @@ def callback(request):
                 elif re.match('情感：', event.message.text):
                     file_path = f'/tmp/{event.source.user_id}:{event.message.text[3:]}'
                     b=wordanalysis(file_path)
-                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
+                    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=b))
 
                 elif event.message.text == '報表說明':
                     line_bot_api.reply_message(event.reply_token, TextSendMessage(text = instrution_content()))
